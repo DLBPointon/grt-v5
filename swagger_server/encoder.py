@@ -1,5 +1,5 @@
 from connexion.apps.flask_app import FlaskJSONEncoder
-from scripts.swagger_server.model import Base
+from swagger_server.model import Base
 
 
 class JSONEncoder(FlaskJSONEncoder):

@@ -4,14 +4,14 @@ import connexion
 import os
 
 from flask import render_template
-from scripts.swagger_server import encoder
-from scripts.swagger_server.model import db
+from swagger_server import encoder
+from swagger_server.model import db
 
 
 def main():
-    app = connexion.App(__name__, specification_dir='./swagger/')
+    app = connexion.App(__name__, specification_dir='swagger/')
     app.app.json_encoder = encoder.JSONEncoder
-    app.add_api('swagger.yaml', arguments={'title': 'Tree of Life public name API'},
+    app.add_api('swagger.yaml', arguments={'title': 'grit API'},
                 pythonic_params=True)
     app.app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DB_URI']
     app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
