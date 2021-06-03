@@ -1,5 +1,0 @@
-requests~=2.22.0
-jira~=2.0.0
-connexion == 2.7.0
-Flask-SQLAlchemy -- 2.4.4
-setuptools == 53.0.0
