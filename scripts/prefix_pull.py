@@ -1,6 +1,6 @@
 import openpyxl
 
-xlsx_file = 'prefix_assignment_kj2.xlsx'
+xlsx_file = '../prefix_assignment_kj2.xlsx'
 
 opened = openpyxl.load_workbook(xlsx_file)
 
