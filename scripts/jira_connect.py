@@ -14,6 +14,7 @@ import sys
 from jira import JIRA
 import maya
 import requests
+from prefix_assignments import master_dict, dl_dict
 
 
 # Add logging
@@ -189,54 +190,19 @@ def reg_make_prefix(sample_name):
     :param sample_name:
     :return:
     """
-    master_dict = {'a': 'Amphibia',
-                   'b': 'Bird',
-                   'c': 'Non-vascular plants',
-                   'd': 'Dicotyledons',
-                   'e': 'Echinoderms',
-                   'f': 'Fish',
-                   'g': 'Fungi',
-                   'h': 'Platyhelminths',
-                   'i': 'Insects',
-                   'j': 'Jellyfish and Cnidaria',
-                   'k': 'Other Chordates',
-                   'l': 'Monocotyledons',
-                   'm': 'Mammal',
-                   'n': 'Nematodes',
-                   'o': 'Sponges',
-                   'p': 'Protists',
-                   'q': 'Other Arthropods',
-                   'r': 'Reptile',
-                   's': 'Shark',
-                   't': 'Other Animal Phyla',
-                   'u': 'Algae',
-                   'v': 'Other Vascular Plants',
-                   'w': 'Annelids',
-                   'x': 'Molluscs',
-                   'y': 'Bacteria',
-                   'z': 'Archae'
-                   }
-
-    insect_dict = {
-        'i': 'Insect',
-        'il': 'Lepidoptera',
-        'iy': 'Hymenoptera',
-        'id': 'Diptera',
-        'ic': 'Coleoptera'
-    }
-
     prefix_search = re.search(r'([a-z])', sample_name)
     prefix = prefix_search.group(1)
 
     prefix_v_search = re.search(r'([a-z]*)', sample_name)
     prefix_v = prefix_v_search.group(1)
 
-    if master_dict.get(prefix) is not None:
-        if prefix == 'i' and len(prefix_v) > 1:
-            prefix_full = insect_dict.get(prefix_v)
-        else:
-            prefix_full = master_dict.get(prefix)
+    prefix_full = ''
+
+    if len(prefix_v) == 1:
+        if master_dict.get(prefix) is not None:
+            prefix_full = master_dict.get(prefix_v)
     else:
+        prefix_full = dl_dict.get(prefix_v)
         print(f'Error, prefix ({prefix}) not found in master_dict')
         sys.exit()
 
