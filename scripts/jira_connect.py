@@ -7,12 +7,14 @@ Used by R script to connect to JIRA and pull data
 import argparse
 import csv
 import re
+import os
 from datetime import date
 from operator import itemgetter
 import sys
 from jira import JIRA
 import maya
 import requests
+
 
 # Add logging
 
@@ -327,13 +329,13 @@ def record_maker(issue):
             interventions += int(result)
 
     return name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
-               n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
-               interventions
+           n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
+           interventions
 
 
 # Perhaps a function to check whether theres already a file here would be a good idea?
 
-def tsv_file_append(record, location):
+def tsv_file_append(record, location, option):
     """
     appends rather than overwrites
     :return:
@@ -341,7 +343,9 @@ def tsv_file_append(record, location):
     today = date.today()
     todays_date = today.strftime("%d%m%y")
 
-    file_name = f'{location}jira_dump_{todays_date}.tsv'
+    if option.save == "../output/":
+        os.popen('rm ../output/*')
+    file_name = f'{location}jira_dump.tsv'
     print('writing')
     with open(file_name, 'a+', newline='') as end_file:
         tsv_out = csv.writer(end_file, delimiter='\t')
@@ -426,8 +430,8 @@ def main():
                 #  -- End of Block
 
                 name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, \
-                    n50_after, n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, \
-                    ass_percent, ymd_date, interventions = record_maker(issue)
+                n50_after, n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, \
+                ass_percent, ymd_date, interventions = record_maker(issue)
 
                 prefix, prefix_v, prefix_label = reg_make_prefix(name_acc)
 
@@ -435,7 +439,7 @@ def main():
                           length_before, length_after, length_change_per, n50_before, n50_after, n50_change_per,
                           scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date,
                           interventions]
-                file_name = tsv_file_append(record, location)
+                file_name = tsv_file_append(record, location, option)
                 print(record)
                 print(f'---- END OF {issue} ------')
     print('SORTING')

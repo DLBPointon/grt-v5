@@ -1,0 +1,23 @@
+CREATE TABLE GritData(
+    sample_id VARCHAR(20) DEFAULT NULL,
+    latin VARCHAR(50) DEFAULT NULL,
+    prefix_sl VARCHAR(1) DEFAULT NULL,
+    prefix_dl VARCHAR(2) DEFAULT NULL,
+    prefix_fn VARCHAR(30) DEFAULT NULL,
+    family_name VARCHAR(50) DEFAULT NULL,
+    jira_key VARCHAR(10) DEFAULT NULL,
+    project_type VARCHAR(20) DEFAULT NULL,
+    length_before BIGINT DEFAULT NULL,
+    length_after BIGINT DEFAULT NULL,
+    length_change NUMERIC DEFAULT NULL,
+    scaff_n50_before BIGINT DEFAULT NULL,
+    scaff_n50_after BIGINT DEFAULT NULL,
+    scaff_n50_change NUMERIC DEFAULT NULL,
+    scaff_count_before BIGINT DEFAULT NULL,
+    scaff_count_after BIGINT DEFAULT NULL,
+    scaff_count_change NUMERIC DEFAULT NULL,
+    chromosome_assignments VARCHAR(100) DEFAULT NULL,
+    assignment NUMERIC DEFAULT NULL,
+    date_in_YMD DATE DEFAULT NULL,
+    manual_interventions NUMERIC DEFAULT NULL
+);

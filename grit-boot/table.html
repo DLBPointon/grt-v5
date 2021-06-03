@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 
 <body id="page-top">
@@ -22,8 +25,9 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="datedash.html"><i class="fas fa-user"></i><span>Date Dash</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="table.html"><i class="fas fa-table"></i><span>Raw Data</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="datedash.html"><i class="fas fa-greater-than"></i><span>Date Dash</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="maingraphs.html"><i class="fas fa-greater-than"></i><span>Main Graphs</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="table.html"><i class="fas fa-table"></i><span>Table</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -32,16 +36,14 @@
             <div id="content">
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Raw Data</h3>
-                    <h3> This may take some time to load....</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <p class="text-primary m-0 font-weight-bold">Raw Data Table</p>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <object data="assets/img/data_table_full.html" width=1500px height=1000px></object>
-                            </div>
-                        </div>
+                        <script src="assets/js/table_gen.js" type="text/javascript"></script>
+                        <input id='gobutton' type="button" onclick="tabler()" value="Load Table">
+                        <div id='tableLoc' class="card-body" style="height: 800px; width: auto"></div>|
+
                     </div>
                 </div>
             </div>

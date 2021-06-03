@@ -1,0 +1,51 @@
+version: '3'
+services:
+  server:
+    image: postgrest/postgrest
+    ports:
+      - "3000:3000"
+    links:
+      - db:db
+    environment:
+      PGRST_DB_URI: postgres://app_user:password@db:5432/app_db
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: app_user
+    depends_on:
+      - db
+    restart: on-failure
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: password
+      PG_DATA: /var/lib/postgresql/data/mydata/
+    volumes:
+      - "/home/dlbp/grt-v5/grit-boot/output:/var/lib/postgresql/gritdb/"
+      - "/home/dlbp/grt-v5/grit-boot/db_scripts/10_db_init.sql:/docker-entrypoint-initdb.d/10_db_init.sql"
+      - "/home/dlbp/grt-v5/grit-boot/db_scripts/20_db_fill.sql:/docker-entrypoint-initdb.d/20_db_fill.sql"
+    restart: on-failure
+
+  client:
+    image: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - "/home/dlbp/grt-v5/grit-boot:/usr/share/nginx/html:ro"
+    restart: on-failure
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    environment:
+      API_URL: http://localhost:3000/
+    restart: on-failure
+
+  # The above to commented out as it is non essential to the project,
+  # It does however provide a nice descriptive UI of the API
