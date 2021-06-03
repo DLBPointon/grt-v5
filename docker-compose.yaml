@@ -14,6 +14,7 @@ services:
       - db
     restart: on-failure
 
+  # Volumes should be changes as they are specific to the development env
   db:
     image: postgres
     ports:
