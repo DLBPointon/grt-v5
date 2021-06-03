@@ -198,13 +198,10 @@ def reg_make_prefix(sample_name):
 
     prefix_full = ''
 
-    if len(prefix_v) == 1:
-        if master_dict.get(prefix) is not None:
-            prefix_full = master_dict.get(prefix_v)
-    else:
+    if len(prefix_v) == 2:
         prefix_full = dl_dict.get(prefix_v)
-        print(f'Error, prefix ({prefix}) not found in master_dict')
-        sys.exit()
+    else:
+        prefix_full = master_dict.get(prefix)
 
     return prefix, prefix_v, prefix_full
 
@@ -309,8 +306,8 @@ def tsv_file_append(record, location, option):
     today = date.today()
     todays_date = today.strftime("%d%m%y")
 
-    if option.save == "../output/":
-        os.popen('rm ../output/*')
+    if option.save == "../grit-boot/output/":
+        os.popen('rm ../grit-boot/output/*')
     file_name = f'{location}jira_dump.tsv'
     print('writing')
     with open(file_name, 'a+', newline='') as end_file:
@@ -353,6 +350,23 @@ def tsv_file_prepender(file_name_sort):
             'date_in_YMD\tmanual_interventions\n')
         file.write(original)
 
+    return file_name_sort
+
+
+def tsv_file_check(file_name_sort):
+    """
+    Due to inconsistent issues with erroneous footers in the sorted tsv file
+    this function is being implemented to remove any odd lines.
+    :param file_name_sort:
+    :return:
+    """
+    with open(file_name_sort, 'r') as ofile:
+        lines = ofile.readlines()
+    with open(file_name_sort, 'w') as cfile:
+        for line in lines:
+            if re.match('[a-z]', line) is not None or re.match('#', line) is not None:
+                cfile.write(line)
+
 
 def main():
     """
@@ -363,7 +377,9 @@ def main():
     if option.save:
         location = option.save
     else:
-        location = "../output/"
+        location = "../grit-boot/output/"
+
+    os.popen('rm ../grit-boot/output/*')
 
     jira = "https://grit-jira.sanger.ac.uk"  # Base url
     auth_jira = JIRA(jira, basic_auth=(option.user, option.passw))  # Auth
@@ -405,12 +421,19 @@ def main():
                           length_before, length_after, length_change_per, n50_before, n50_after, n50_change_per,
                           scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date,
                           interventions]
-                file_name = tsv_file_append(record, location, option)
-                print(record)
-                print(f'---- END OF {issue} ------')
+                if type(record[0]) == str:
+                    file_name = tsv_file_append(record, location, option)
+                    print(record)
+                    print(f'---- END OF {issue} ------')
+                else:
+                    pass
     print('SORTING')
     file_name_sort = tsv_file_sort(file_name)
-    tsv_file_prepender(file_name_sort)
+    print('SORTING FIN')
+    print('ADDING TOP LINE')
+    file_name_sort = tsv_file_prepender(file_name_sort)
+    print('DOUBLE CHECKING FILE FOOTER')
+    tsv_file_check(file_name_sort)
     print('FIN')
 
 
