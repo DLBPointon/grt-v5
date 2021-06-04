@@ -1,0 +1,65 @@
+version: '3'
+services:
+  api:
+    image: "postgrest/postgrest:${PGRST_VERSION}"
+    ports:
+      - "3000:3000"
+    links:
+      - db:db
+    environment:
+      PGRST_DB_URI: "${PGRST_DB_URI}"
+      PGRST_DB_SCHEMA: "${PGRST_DB_SCHEMA}"
+      PGRST_DB_ANON_ROLE: "${PGRST_DB_ANON_ROLE}"
+    depends_on:
+      - db
+    env_file:
+      - sample.env
+    restart: on-failure
+
+  # Volumes should be changes as they are specific to the development env
+  db:
+    image: "postgres:${POSTGRES_VERSION}"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      PG_DATA: "${PG_DATA}"
+    volumes:
+      - "/home/dlbp/grt-v5/grit-boot/output:/var/lib/postgresql/gritdb/"
+      - "/home/dlbp/grt-v5/grit-boot/db_scripts/10_db_init.sql:/docker-entrypoint-initdb.d/10_db_init.sql"
+      - "/home/dlbp/grt-v5/grit-boot/db_scripts/20_db_fill.sql:/docker-entrypoint-initdb.d/20_db_fill.sql"
+    env_file:
+      - sample.env
+    restart: always
+
+  client:
+    image: "nginx:${NGINX_VERSION}"
+    ports:
+      - "8000:80"
+    volumes:
+      - "/home/dlbp/grt-v5/grit-boot:/usr/share/nginx/html:ro"
+    depends_on:
+      - db
+      - api
+    env_file:
+      - sample.env
+    restart: always
+
+  swagger:
+    image: "swaggerapi/swagger-ui:${SWAGGER_VERSION}"
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    environment:
+      API_URL: "${API_URL}"
+    depends_on:
+      - api
+    env_file:
+      - sample.env
+    restart: always
+
+  # The above to commented out as it is non essential to the project,
+  # It does however provide a nice descriptive UI of the API
