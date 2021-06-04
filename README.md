@@ -20,6 +20,52 @@ grt-v5_db_1 : The PostgreSQL database, this will contain all of the information 
 
 grt-v5_swagger_1 : A Swagger API UI.
 
+## Scripts:
+
+### Python:
+
+jira_connect.py - Main script which pulls data from the Jira API, massages and outputs to a sorted TSV file ready for ingestion by the docker containers.
+
+jira_2_db_update.py - Script to be run on a daily basis to update the PostgreSQL database with new data.
+
+prefix_pull.py - An accessory script which pulls double letter assignments and clade information from the prefix_assignment_kj2.xlsx file.
+
+prefix_assignments.py - Not technically a script but contains dictionaries on taxonomic information which is required by the main scripts.
+
+### SQL:
+
+10_db_init.sql - Creates the PSQL database table upon docker-compose up.
+
+20_db_fill.sql - Fills the database table with information from jira_dump.tsv.sorted.
+
+### R:
+
+These are no longer in use but make up the old version of this projects graph generation and logic for reference.
+
+grit_graphs.R - Graph generation script.
+
+jira_data.R - Graph generation script.
+
+### JavaScript
+
+- index.html
+  - maingraph{1/2}.js - Produces the 2 main graphs.
+ 
+  - rightgraph{1/2}.js - 1 produces the box chart, 2 produces the pie chart or project numbers.
+ 
+
+- datedash.html
+  - date_graph.js - Produces a date time graph to be modified in the future to include pipeline versions,
+    allows visualization of data over specific time frames.
+    
+
+- maingraphs.html
+  - gevalgraph{1/2/3/4).js - These graphs mimic those found in the gEVAL paper [found here](https://www.biorxiv.org/content/10.1101/2020.08.12.247734v1.full).
+
+
+- table.html
+  - table_gen.js - Generates a table with select data as raw as possible for data verification.
+
 ### Notes:
 The docker-compose.yaml volumes are currently hardcoded for my machine, these will need changing.
 
