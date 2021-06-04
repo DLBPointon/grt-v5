@@ -8,7 +8,11 @@ as well as in a modernised tripartite docker container system controlled by dock
 grt-v5 is the initial step towards creating a dashboard for GRIT (Genome Reference Informatics Team)
 and offer decentralised access to metrics related to genome curation.
 
-## Containers:
+### Notes:
+The docker-compose.yaml volumes are currently hardcoded for my machine, these will need changing.
+
+## Containers
+<details>
 
 grt-v5_server_1 : postgrest, a swagger api wrapper for PostgreSQL databases. It produces a usable API but with the one endpoint which is not ideal.
 
@@ -20,7 +24,10 @@ grt-v5_db_1 : The PostgreSQL database, this will contain all of the information 
 
 grt-v5_swagger_1 : A Swagger API UI.
 
+</details>
+
 ## Scripts:
+<details>
 
 ### Python:
 
@@ -66,10 +73,10 @@ jira_data.R - Graph generation script.
 - table.html
   - table_gen.js - Generates a table with select data as raw as possible for data verification.
 
-### Notes:
-The docker-compose.yaml volumes are currently hardcoded for my machine, these will need changing.
+</details>
 
 ## Proposal:
+<details> 
 Genome assembly curation has a significant impact on assembly quality,
 and allows for the identification of opportunities for improvement within automated assembly generation.
 Analysis of a multitude of assembly parameters is required, ideally in real time,
@@ -84,9 +91,13 @@ automated and consistent fashion.
 Ultimately this results in the production of a dashboard/website that provides a real-time
 report on curation impacts for specified data groups, within a specified time frame.
 
+</details>
+
 ## Project Outline:
+<details>
+
 ### Phase 1
-#### Harvesting - 
+#### Harvesting
 Controlled by a python script, this will download all relevant
 data from Jira as well as from family data from the ENA database.
 
@@ -111,7 +122,8 @@ This utilises:
 | sys | - Used for safe exiting of the script | [X] |
 
 
-## Phase 2 - Docker-compose
+### Phase 2
+#### Docker-compose
 In order to adopt a more modern approach, it was decided to utilise docker.
 This would remove the need for front-end to be the point of reading data, calculation and presentation to graphs
 this is now mostly moved to the PostgresSQL database and the API.
@@ -119,12 +131,17 @@ This allows the PSQL database to handle the data, the API to allow access for sp
 leaving only the graph production for the website.
 Graphs are produced purely in Plotly.js which has proven to be a very flexible framework.
 
-## Phase 3 - Updating
+### Phase 3
+#### Updating
 This has been simplified and automated with a python3.7 script which uses the pre-existing database to
  return the most recent date in the database and use it as the minimum date in a query to Jira.
 This will return a list of records (a python list of all required data).
 
+</details>
+
 ## Usage
+
+<details>
 
 #### 1 - Git Clone
 
@@ -161,6 +178,7 @@ I believe it is beneficial to have the updating script run as a crontab job.
 `8 * * * 0,1,2,3,4 {PYTHON LIB} jira_2_db_update.py {JIRA_USER} {JIRA_PASS}`
 
 This will directly update the psql database via calls to the JIRA_API and then the grt-API.
+</details>
 
 ## TO-DO List
 Updated 28/05/2021
