@@ -7,7 +7,7 @@ function makegraph_box() {
     var three = document.getElementById('RightGraphSelector1C');
     three = three.options[three.selectedIndex].value
 
-    var url = 'http://localhost:3000/gritdata?select='+two+','+three
+    var url = 'http://172.27.21.37:3000/gritdata?select='+two+','+three
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

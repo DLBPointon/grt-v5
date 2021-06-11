@@ -5,7 +5,7 @@ function makegraph_pie() {
     var one = document.getElementById('RightGraphSelector2X');
     one = one.options[one.selectedIndex].value
 
-    var url = 'http://localhost:3000/gritdata?select='+one
+    var url = 'http://172.27.21.37:3000/gritdata?select='+one
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

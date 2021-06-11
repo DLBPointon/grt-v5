@@ -14,7 +14,7 @@ function dategrapher() {
 
     var labels = 'sample_id'
 
-    var url = 'http://localhost:3000/gritdata?select='+one+','+two+','+three+','+four+','+labels
+    var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three+','+four+','+labels
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

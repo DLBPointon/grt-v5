@@ -8,7 +8,7 @@ function gevalgraph3() {
     var two = 'scaff_count_change';
     var four = 'length_after';
 
-    var url = 'http://localhost:3000/gritdata?select=' + one + ',' + two + ',' + three + ',' + four;
+    var url = 'http://172.27.21.37:3000/gritdata?select=' + one + ',' + two + ',' + three + ',' + four;
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
