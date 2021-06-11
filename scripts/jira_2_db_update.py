@@ -8,9 +8,17 @@ import sys
 import re
 from jira import JIRA
 from datetime import date
+from dotenv import load_dotenv
 
 # Global variable for db url
-URL = 'http://localhost:3000/gritdata'
+URL = 'http://172.27.21.37:3000/gritdata'
+
+
+def dotloader():
+    load_dotenv()
+    jira_user = os.getenv('JIRA_USER')
+    jira_pass = os.getenv('JIRA_PASS')
+    return jira_user, jira_pass
 
 
 def get_db_data():
@@ -38,9 +46,9 @@ def get_db_data():
     return latest_date, sample_id_list
 
 
-def auth_jira():
+def auth_jira(username, password):
     jira = "https://grit-jira.sanger.ac.uk"
-    auth_jira = JIRA(jira, basic_auth=(sys.argv[1], sys.argv[2]))
+    auth_jira = JIRA(jira, basic_auth=(username, password))
     return auth_jira
 
 
@@ -125,8 +133,10 @@ def update_psql(record):
 
 def main():
     latest_date, sample_id_list = get_db_data()
+    
+    username, password = dotloader()
 
-    auth = auth_jira()
+    auth = auth_jira(username, password)
 
     record = get_jira_data(auth, sample_id_list)
 
