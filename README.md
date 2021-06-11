@@ -185,11 +185,7 @@ Updated 28/05/2021
 
 |Job | Done? |
 | :---: | :---: |
-| Website Security | [ ]|
-| Docker Secrets - multiple files to compose | [ ]|
-| ^- psql secrets | [ ]|
-| ^- psqlREST secrets | [ ]|
-| ^- nginx secrets | [ ]|
+| Secrets | No longer needed |
 | chr assignment still needs parsing |[ ]|
 | Graph borders need cleaning and pushing inside of the border | [ ]|
 | Docker-compose volumes need making generic | [ ]|
