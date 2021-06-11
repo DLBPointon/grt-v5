@@ -1,0 +1,7 @@
+name: grt-env
+dependencies:
+        - python=3.8
+        - requests
+        - python-jira
+        - python-dotenv
+        - maya
