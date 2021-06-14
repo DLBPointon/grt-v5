@@ -32,7 +32,17 @@ function makegraph_box() {
 
         var datas = [trace1];
 
+        var elmntr1 = document.getElementById("rightgraph1").clientWidth - 30
+
+
         var layout = {
+            width: elmntr1,
+            autosize: true,
+            margin: {
+                l: 50,
+                r: 50,
+                t: 0
+            },
         };
 
         var config = {responsive: true, displayModeBar: true}

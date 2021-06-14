@@ -38,6 +38,8 @@ function gevalgraph4() {
 
         var datas = [trace1];
 
+        var elmntgg4 = document.getElementById("gevalgraph4").clientWidth - 30
+
         var layout = {
             title: 'Sequence assigned to chromosome (%) by Assembly size (normalised to 1000Mb)',
                 xaxis: {
@@ -45,7 +47,8 @@ function gevalgraph4() {
                 },
                 yaxis: {
                     title: 'Sequence assigned to chromosome (%)'
-                }
+                },
+            width: elmntgg4
 
         };
 

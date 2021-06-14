@@ -56,6 +56,9 @@ function makegraph_2() {
 
         var datas = [trace1];
 
+        var elmnt = document.getElementById("maingraph2").clientWidth - 60
+
+
         var layout = {
             title: 'Graph showing '+ one + ' and ' + two + ' coloured by ' + three,
             xaxis: {
@@ -70,14 +73,15 @@ function makegraph_2() {
                 tickcolor: 'rgb(102, 102, 102)'
             },
             margin: {
-                    l: 25,
+                    l: 50,
                     r: 0,
             },
             legend: {
                 font: {size: 8,},
                 yanchor: 'middle',
                 xanchor: 'right'
-            }
+            },
+            width: elmnt
         };
         var config = {responsive: true, displayModeBar: true}
         Plotly.react('maingraph2', datas, layout, config);

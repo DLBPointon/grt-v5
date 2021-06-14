@@ -38,6 +38,8 @@ function gevalgraph2() {
 
         var datas = [trace1];
 
+        var elmntgg2 = document.getElementById("gevalgraph2").clientWidth - 30
+
         var layout = {
             title: 'Scaff N50 count change (%) by Assembly size (normalised to 1000Mb)',
                 xaxis: {
@@ -45,7 +47,8 @@ function gevalgraph2() {
                 },
                 yaxis: {
                     title: 'Scaff N50 count change (%)'
-                }
+                },
+            width: elmntgg2
 
         };
 

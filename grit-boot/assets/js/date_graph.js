@@ -50,6 +50,8 @@ function dategrapher() {
 
         var datas = [trace1]
 
+        var elmntdg = document.getElementById("dategraphLoc").clientWidth - 30
+
         var layout = {
             title: 'Time Series of with Rangeslider',
             xaxis: {
@@ -77,7 +79,8 @@ function dategrapher() {
             },
             yaxis: {
                 autorange: true
-            }
+            },
+            width: elmntdg
         };
 
         var config = {responsive: true, displayModeBar: true}

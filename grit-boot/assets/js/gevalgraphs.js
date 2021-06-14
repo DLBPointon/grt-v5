@@ -38,15 +38,17 @@ function gevalgraph1() {
 
         var datas = [trace1];
 
+        var elmntgg1 = document.getElementById("gevalgraph1").clientWidth - 30
+
         var layout = {
             title: 'Manual Interventions (normalised to 1000Mb) by Assembly size (normalised to 1000Mb)',
-                xaxis: {
+            xaxis: {
                     title: 'Assembly Size (normalised to 1000Mb)'
                 },
-                yaxis: {
+            yaxis: {
                     title: 'Manual Interventions (normalised to 1000mb'
-                }
-
+                },
+            width: elmntgg1
         };
 
         var config = {responsive: true, displayModeBar: true}

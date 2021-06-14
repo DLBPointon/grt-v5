@@ -28,8 +28,18 @@ function makegraph_pie() {
         type:'pie'
         }];
 
+        var elmntr2 = document.getElementById("rightgraph2").clientWidth - 30
+
         var layout = {
+            width: elmntr2,
+            autosize: true,
+            margin: {
+                l: 50,
+                r: 50,
+                t: 0
+            },
         };
+
 
         var config = {responsive: true, displayModeBar: true}
         Plotly.react('rightgraph2', datas, layout, config);
