@@ -306,8 +306,6 @@ def tsv_file_append(record, location, option):
     today = date.today()
     todays_date = today.strftime("%d%m%y")
 
-    if option.save == "../grit-boot/output/":
-        os.popen('rm ../grit-boot/output/*')
     file_name = f'{location}jira_dump.tsv'
     print('writing')
     with open(file_name, 'a+', newline='') as end_file:
@@ -378,8 +376,6 @@ def main():
         location = option.save
     else:
         location = "../grit-boot/output/"
-
-    os.popen('rm ../grit-boot/output/*')
 
     jira = "https://grit-jira.sanger.ac.uk"  # Base url
     auth_jira = JIRA(jira, basic_auth=(option.user, option.passw))  # Auth
