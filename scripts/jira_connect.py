@@ -338,15 +338,20 @@ def tsv_file_prepender(file_name_sort):
     :param file_name_sort:
     :return:
     """
+    top_line = '#sample_id\tlatin_name\tprefix\tprefix_v\tprefix_full\tfamily_data\tkey\tproject_type\t' \
+               'length before\tlength after\tlength change\tscaff n50 before\tscaff n50 after\tscaff n50 change\t' \
+               'scaff_count_before\tscaff_count_after\tscaff_count_per\tchr assignment\tassignment\t' \
+               'date_in_YMD\tmanual_interventions\n'
+
     with open(file_name_sort, 'r+') as file:
         original = file.read()
-        file.seek(0, 0)  # Move the cursor to top line
-        file.write(
-            '#sample_id\tlatin_name\tprefix\tprefix_v\tprefix_full\tfamily_data\tkey\tproject_type\t'
-            'length before\tlength after\tlength change\tscaff n50 before\tscaff n50 after\tscaff n50 change\t'
-            'scaff_count_before\tscaff_count_after\tscaff_count_per\tchr assignment\tassignment\t'
-            'date_in_YMD\tmanual_interventions\n')
-        file.write(original)
+        top_check = file.seek(0, 0)  # Move the cursor to top line
+        if top_check == top_line:
+            pass
+        else:
+            file.seek(0, 0)
+            file.write(top_line)
+            file.write(original)
 
     return file_name_sort
 
