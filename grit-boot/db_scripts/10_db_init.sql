@@ -19,5 +19,6 @@ CREATE TABLE GritData(
     chromosome_assignments VARCHAR(100) DEFAULT NULL,
     assignment NUMERIC DEFAULT NULL,
     date_in_YMD DATE DEFAULT NULL,
+    date_updated DATE DEFAULT NULL,
     manual_interventions NUMERIC DEFAULT NULL
 );

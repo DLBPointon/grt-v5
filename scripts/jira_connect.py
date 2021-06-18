@@ -27,7 +27,7 @@ def parse_command_args(args=None):
     :param args:
     :return option:
     """
-    parser = argparse.ArgumentParser(prog='jira_data.py',
+    parser = argparse.ArgumentParser(prog='jira_connect.py',
                                      description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
 
@@ -291,9 +291,11 @@ def record_maker(issue):
         else:
             interventions += int(result)
 
+    date_updated = date.today()
+
     return name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
            n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
-           interventions
+           date_updated, interventions
 
 
 # Perhaps a function to check whether theres already a file here would be a good idea?
@@ -341,7 +343,7 @@ def tsv_file_prepender(file_name_sort):
     top_line = '#sample_id\tlatin_name\tprefix\tprefix_v\tprefix_full\tfamily_data\tkey\tproject_type\t' \
                'length before\tlength after\tlength change\tscaff n50 before\tscaff n50 after\tscaff n50 change\t' \
                'scaff_count_before\tscaff_count_after\tscaff_count_per\tchr assignment\tassignment\t' \
-               'date_in_YMD\tmanual_interventions\n'
+               'date_in_YMD\tdate_updated\tmanual_interventions\n'
 
     with open(file_name_sort, 'r+') as file:
         original = file.read()
@@ -414,14 +416,14 @@ def main():
 
                 name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, \
                 n50_after, n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, \
-                ass_percent, ymd_date, interventions = record_maker(issue)
+                ass_percent, ymd_date, date_updated, interventions = record_maker(issue)
 
                 prefix, prefix_v, prefix_label = reg_make_prefix(name_acc)
 
                 record = [name_acc, lat_name, prefix, prefix_v, prefix_label, family_data, issue, project_type,
                           length_before, length_after, length_change_per, n50_before, n50_after, n50_change_per,
                           scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date,
-                          interventions]
+                          date_updated, interventions]
                 if type(record[0]) == str:
                     file_name = tsv_file_append(record, location, option)
                     print(record)
