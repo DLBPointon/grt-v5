@@ -77,7 +77,7 @@
                                             <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Date of last update</span></div>
                                             <script>
                                                 function latest_date() {
-                                                    var url = 'http://172.27.21.37:3000/gritdata?limit=1&order=date_in_ymd.desc&select=date_in_ymd'
+                                                    var url = 'http://172.27.21.37:3000/gritdata?limit=1&order=date_updated.desc&select=date_updated'
                                                     d3.json(url, function (error, data) {
                                                         if (error) return console.warn(error);
                                                         var date_item = JSON.stringify(data).split(":")[1].split('"');
