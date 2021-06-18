@@ -1,20 +1,5 @@
 TESTER = document.getElementById('maingraph2');
 
-function rand_colour () {
-    var r = Math.random()*255;
-    var g = Math.random()*255;
-    var b = Math.random()*255;
-    return 'rgb('+r+','+g+','+b+')'
-}
-
-var colour_map = []
-
-function getColour(project) {
-    if (project in colour_map) {return colour_map[project]}
-        colour_map[project] = rand_colour();
-    return colour_map[project]
-}
-
 function makegraph_2() {
 
     var one = document.getElementById('MainGraphSelector2X');
@@ -23,11 +8,7 @@ function makegraph_2() {
     two = two.options[two.selectedIndex].value
     var three = 'project_type'
 
-    if (two === 'mipergb') {
-        var url = 'http://172.27.21.37:3000/gritdata?select='+one+',manual_interventions,'+three+',length_after'
-    } else {
-        var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
-    }
+    var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
