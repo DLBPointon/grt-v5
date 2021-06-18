@@ -24,7 +24,7 @@ def dotloader():
 def get_db_data():
     sample_id_list = []
 
-    url = URL + '?limit=1&order=date_in_ymd.desc&select=date_in_ymd'
+    url = URL + '?limit=1&order=date_updated.desc&select=date_in_ymd'
     db_req = requests.get(url)
     print(f'Connection Status Code: {db_req.status_code}')
 
