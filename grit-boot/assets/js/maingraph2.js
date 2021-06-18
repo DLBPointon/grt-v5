@@ -19,7 +19,7 @@ function makegraph_2() {
         data.forEach((item) => {
             x.push(item[one]);
 
-            if (two === 'mipergb') {
+            if (two === 'manual_interventions,length_after') {
                 y.push((item['manual_interventions']/item['length_after'])*1000000000)
             } else {
                 y.push(item[two]);
