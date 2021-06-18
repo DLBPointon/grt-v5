@@ -105,35 +105,35 @@ def update_psql(record):
     :return:
     """
     post_url = URL
-    post_object = '{' \
-                  f'"sample_id": {record["name_acc"]},' \
-                  f'"latin": {record["lat_name"]},' \
-                  f'"prefix_sl": {record["prefix"]},' \
-                  f'"prefix_dl": {record["prefix_v"]},' \
-                  f'"prefix_fn": {record["prefix_label"]},' \
-                  f'"family_name": {record["family_data"]},' \
-                  f'"jira_key": {record["issue"]},' \
-                  f'"project_type": {record["project_type"]},' \
-                  f'"length_before": {record["length_before"]},' \
-                  f'"length_after": {record["length_after"]},' \
-                  f'"length_change": {record["length_change"]},' \
-                  f'"scaff_n50_before": {record["n50_before"]},' \
-                  f'"scaff_n50_after": {record["n50_after"]},' \
-                  f'"scaff_n50_change": {record["n50_change_per"]},' \
-                  f'"scaff_count_before": {record["scaff_count_before"]},' \
-                  f'"scaff_count_after": {record["scaff_count_after"]},' \
-                  f'"scaff_count_change": {record["scaff_count_per"]},' \
-                  f'"chromosome_assignments": {record["chr_ass"]},' \
-                  f'"assignment": {record["ass_percent"]},' \
-                  f'"date_in_ymd": {record["ymd_date"]},' \
-                  f'"manual_interventions": {record["interventions"]}' \
+    post_object = '{' + \
+                  f'"sample_id": {record["name_acc"]},' + \
+                  f'"latin": {record["lat_name"]},' + \
+                  f'"prefix_sl": {record["prefix"]},' + \
+                  f'"prefix_dl": {record["prefix_v"]},' + \
+                  f'"prefix_fn": {record["prefix_label"]},' + \
+                  f'"family_name": {record["family_data"]},' + \
+                  f'"jira_key": {record["issue"]},' + \
+                  f'"project_type": {record["project_type"]},' + \
+                  f'"length_before": {record["length_before"]},' + \
+                  f'"length_after": {record["length_after"]},' + \
+                  f'"length_change": {record["length_change"]},' + \
+                  f'"scaff_n50_before": {record["n50_before"]},' + \
+                  f'"scaff_n50_after": {record["n50_after"]},' + \
+                  f'"scaff_n50_change": {record["n50_change_per"]},' + \
+                  f'"scaff_count_before": {record["scaff_count_before"]},' + \
+                  f'"scaff_count_after": {record["scaff_count_after"]},' + \
+                  f'"scaff_count_change": {record["scaff_count_per"]},' + \
+                  f'"chromosome_assignments": {record["chr_ass"]},' + \
+                  f'"assignment": {record["ass_percent"]},' + \
+                  f'"date_in_ymd": {record["ymd_date"]},' + \
+                  f'"manual_interventions": {record["interventions"]}' + \
                   '}'
     post_req = requests.post(post_url, data=post_object)
 
 
 def main():
     latest_date, sample_id_list = get_db_data()
-    
+
     username, password = dotloader()
 
     auth = auth_jira(username, password)
