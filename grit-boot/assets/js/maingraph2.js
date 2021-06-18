@@ -23,7 +23,11 @@ function makegraph_2() {
     two = two.options[two.selectedIndex].value
     var three = 'project_type'
 
-    var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
+    if (two === 'mipergb') {
+        var url = 'http://172.27.21.37:3000/gritdata?select='+one+',manual_interventions,'+three+',length_after'
+    } else {
+        var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
+    }
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -33,7 +37,13 @@ function makegraph_2() {
 
         data.forEach((item) => {
             x.push(item[one]);
-            y.push(item[two]);
+
+            if (two === 'mipergb') {
+                y.push((item['manual_interventions']/item['length_after'])*1000000000)
+            } else {
+                y.push(item[two]);
+            }
+
             c.push(item[three]);
         });
 

@@ -7,7 +7,11 @@ function makegraph_box() {
     var three = document.getElementById('RightGraphSelector1C');
     three = three.options[three.selectedIndex].value
 
-    var url = 'http://172.27.21.37:3000/gritdata?select='+two+','+three
+    if (two === 'mipergb') {
+        var url = 'http://172.27.21.37:3000/gritdata?select=manual_interventions,'+three+',length_after'
+    } else {
+        var url = 'http://172.27.21.37:3000/gritdata?select='+two+','+three
+    }
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -16,7 +20,11 @@ function makegraph_box() {
 
 
         data.forEach((item) => {
-            y.push(item[two]);
+            if (two === 'mipergb') {
+                y.push((item['manual_interventions']/item['length_after'])*1000000000)
+            } else {
+                y.push(item[two]);
+            }
             c.push(item[three]);
         });
 
