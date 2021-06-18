@@ -54,10 +54,10 @@ def auth_jira(username, password):
 
 def get_jira_data(auth, sample_id_list):
     record = []
-    projects = auth.search_issues('project = "Assembly curation" and status = Done OR '
-                                  'project = "Assembly curation" and status = Submitted OR '
-                                  'project = "Assembly curation" and status = "In Submission OR '
-                                  'project = "Assembly curation" and status = "Post Processing++" '
+    projects = auth.search_issues('project="Assembly curation" AND status = Done OR '
+                                  'project="Assembly curation" AND status = Submitted OR '
+                                  'project="Assembly curation" AND status = "In Submission" OR '
+                                  'project="Assembly curation" AND status = "Post Processing++" '
                                   'ORDER BY key ASC',
                                   maxResults=10000)
 
