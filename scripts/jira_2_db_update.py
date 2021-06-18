@@ -128,7 +128,7 @@ def update_psql(record):
                   f'"date_in_ymd": {record[19]},' + \
                   f'"manual_interventions": {record[20]}' + \
                   '}'
-    post_req = requests.post(post_url, data=post_object)
+    requests.post(post_url, data=post_object)
 
 
 def main():
