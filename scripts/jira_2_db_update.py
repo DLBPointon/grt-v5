@@ -106,27 +106,27 @@ def update_psql(record):
     """
     post_url = URL
     post_object = '{' + \
-                  f'"sample_id": {record["name_acc"]},' + \
-                  f'"latin": {record["lat_name"]},' + \
-                  f'"prefix_sl": {record["prefix"]},' + \
-                  f'"prefix_dl": {record["prefix_v"]},' + \
-                  f'"prefix_fn": {record["prefix_label"]},' + \
-                  f'"family_name": {record["family_data"]},' + \
-                  f'"jira_key": {record["issue"]},' + \
-                  f'"project_type": {record["project_type"]},' + \
-                  f'"length_before": {record["length_before"]},' + \
-                  f'"length_after": {record["length_after"]},' + \
-                  f'"length_change": {record["length_change"]},' + \
-                  f'"scaff_n50_before": {record["n50_before"]},' + \
-                  f'"scaff_n50_after": {record["n50_after"]},' + \
-                  f'"scaff_n50_change": {record["n50_change_per"]},' + \
-                  f'"scaff_count_before": {record["scaff_count_before"]},' + \
-                  f'"scaff_count_after": {record["scaff_count_after"]},' + \
-                  f'"scaff_count_change": {record["scaff_count_per"]},' + \
-                  f'"chromosome_assignments": {record["chr_ass"]},' + \
-                  f'"assignment": {record["ass_percent"]},' + \
-                  f'"date_in_ymd": {record["ymd_date"]},' + \
-                  f'"manual_interventions": {record["interventions"]}' + \
+                  f'"sample_id": {record[0]},' + \
+                  f'"latin": {record[1]},' + \
+                  f'"prefix_sl": {record[2]},' + \
+                  f'"prefix_dl": {record[3]},' + \
+                  f'"prefix_fn": {record[4]},' + \
+                  f'"family_name": {record[5]},' + \
+                  f'"jira_key": {record[6]},' + \
+                  f'"project_type": {record[7]},' + \
+                  f'"length_before": {record[8]},' + \
+                  f'"length_after": {record[9]},' + \
+                  f'"length_change": {record[10]},' + \
+                  f'"scaff_n50_before": {record[11]},' + \
+                  f'"scaff_n50_after": {record[12]},' + \
+                  f'"scaff_n50_change": {record[13]},' + \
+                  f'"scaff_count_before": {record[14]},' + \
+                  f'"scaff_count_after": {record[15]},' + \
+                  f'"scaff_count_change": {record[16]},' + \
+                  f'"chromosome_assignments": {record[17]},' + \
+                  f'"assignment": {record[18]},' + \
+                  f'"date_in_ymd": {record[19]},' + \
+                  f'"manual_interventions": {record[20]}' + \
                   '}'
     post_req = requests.post(post_url, data=post_object)
 
