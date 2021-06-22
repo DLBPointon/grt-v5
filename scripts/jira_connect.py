@@ -247,6 +247,14 @@ def record_maker(issue):
         'manual_haplotig_removals': issue.fields.customfield_10222,
     }
 
+    chromosome_data = {
+        'chromosome_naming_scheme': issue.fields.customfield_10218,
+        'expected_sex': issue.fields.customfield_10517,
+        'observed_sex': issue.fields.customfield_10518,
+        'curated_autosomes': issue.fields.customfield_10515,
+        'curated_allosomes': issue.fields.customfield_10516
+    }
+
     name_acc = ''
     length_before = 0
     length_after = 0
@@ -263,6 +271,11 @@ def record_maker(issue):
     scaff_count_per = 0
     lat_name = ''
     family_data = ''
+    chr_naming = ''
+    ex_sex = ''
+    ob_sex = ''
+    cur_allo = ''
+    cur_auto = 0
 
     for field, result in id_for_custom_field_name.items():
         if field == 'gEVAL_database':
@@ -291,11 +304,30 @@ def record_maker(issue):
         else:
             interventions += int(result)
 
+    for field, result in chromosome_data.items():
+        if result is None:
+            pass
+        else:
+            if field == 'chromosome_naming_scheme':
+                chr_naming = str(result)
+            elif field == 'expected_sex':
+                ex_sex = str(result)
+            elif field == 'observed_sex':
+                ob_sex = str(result)
+            elif field == 'curated_autosomes':
+                cur_auto = int(result)
+            elif field == 'curated_allosomes':
+                if ',' in result:
+                    splitres = result.split(',')
+                    cur_allo = str(''.join(splitres))
+                else:
+                    cur_allo = str(result)
+
     date_updated = date.today()
 
     return name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
            n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
-           date_updated, interventions
+           date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo
 
 
 # Perhaps a function to check whether theres already a file here would be a good idea?
@@ -343,7 +375,8 @@ def tsv_file_prepender(file_name_sort):
     top_line = '#sample_id\tlatin_name\tprefix\tprefix_v\tprefix_full\tfamily_data\tkey\tproject_type\t' \
                'length before\tlength after\tlength change\tscaff n50 before\tscaff n50 after\tscaff n50 change\t' \
                'scaff_count_before\tscaff_count_after\tscaff_count_per\tchr assignment\tassignment\t' \
-               'date_in_YMD\tdate_updated\tmanual_interventions\n'
+               'date_in_YMD\tdate_updated\tmanual_interventions\tchrosome_named\texpected_sex\tobserved_sex\t' \
+               'curated_autosome\tcurated_allosome\n'
 
     with open(file_name_sort, 'r+') as file:
         original = file.read()
@@ -414,16 +447,17 @@ def main():
                 lat_name = issue.fields.customfield_10215
                 #  -- End of Block
 
-                name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, \
-                n50_after, n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, \
-                ass_percent, ymd_date, date_updated, interventions = record_maker(issue)
+                name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
+                n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
+                date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo = record_maker(issue)
 
                 prefix, prefix_v, prefix_label = reg_make_prefix(name_acc)
 
-                record = [name_acc, lat_name, prefix, prefix_v, prefix_label, family_data, issue, project_type,
-                          length_before, length_after, length_change_per, n50_before, n50_after, n50_change_per,
-                          scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date,
-                          date_updated, interventions]
+                record = [name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before,
+                          n50_after,
+                          n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent,
+                          ymd_date,
+                          date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo]
                 if type(record[0]) == str:
                     file_name = tsv_file_append(record, location, option)
                     print(record)
