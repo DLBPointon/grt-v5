@@ -20,5 +20,10 @@ CREATE TABLE GritData(
     assignment NUMERIC DEFAULT NULL,
     date_in_YMD DATE DEFAULT NULL,
     date_updated DATE DEFAULT NULL,
-    manual_interventions NUMERIC DEFAULT NULL
+    manual_interventions NUMERIC DEFAULT NULL,
+    chromosome_naming VARCHAR(15) DEFAULT NULL,
+    expected_sex VARCHAR(2) DEFAULT NULL,
+    observed_sex VARCHAR(2) DEFAULT NULL,
+    curated_autosomes NUMERIC DEFAULT NULL,
+    curated_allosomes VARCHAR(3) DEFAULT NULL
 );
