@@ -453,11 +453,13 @@ def main():
 
                 prefix, prefix_v, prefix_label = reg_make_prefix(name_acc)
 
-                record = [name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before,
-                          n50_after,
-                          n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent,
-                          ymd_date,
-                          date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo]
+                record = [name_acc, lat_name, prefix, prefix_v, prefix_label, family_data,
+                          length_before, length_after, length_change_per,
+                          n50_before, n50_after, n50_change_per,
+                          scaff_count_before, scaff_count_after, scaff_count_per,
+                          chr_ass, ass_percent, ymd_date, date_updated, interventions,
+                          chr_naming, ex_sex, ob_sex, cur_auto, cur_allo]
+
                 if type(record[0]) == str:
                     file_name = tsv_file_append(record, location, option)
                     print(record)
