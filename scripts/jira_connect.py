@@ -454,6 +454,7 @@ def main():
                 prefix, prefix_v, prefix_label = reg_make_prefix(name_acc)
 
                 record = [name_acc, lat_name, prefix, prefix_v, prefix_label, family_data,
+                          issue, project_type,
                           length_before, length_after, length_change_per,
                           n50_before, n50_after, n50_change_per,
                           scaff_count_before, scaff_count_after, scaff_count_per,
