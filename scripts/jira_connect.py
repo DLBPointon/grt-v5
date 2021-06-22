@@ -145,7 +145,7 @@ def reg_chr_assignment(chromo_res):
     if ass_percent_search:
         ass_percent = ass_percent_search.group(1)
     else:
-        ass_percent = 'NA'
+        ass_percent = None
 
     return chr_ass, ass_percent
 
