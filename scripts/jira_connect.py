@@ -4,55 +4,26 @@ Used by R script to connect to JIRA and pull data
 
 # Eliminates all where there isn't a full complement of data for the ticket
 """
-import argparse
 import csv
 import re
 import os
+from os import path
 from datetime import date
 from operator import itemgetter
-import sys
 from jira import JIRA
 import maya
 import requests
+from dotenv import load_dotenv
 from prefix_assignments import master_dict, dl_dict
 
 
 # Add logging
 
-
-def parse_command_args(args=None):
-    """
-    A function to verify the command line arguments to be passed
-    to the rest of the script.
-    :param args:
-    :return option:
-    """
-    parser = argparse.ArgumentParser(prog='jira_connect.py',
-                                     description=__doc__,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-
-    parser.add_argument('-USER', '--JIRA-ID',
-                        action='store',
-                        help='ID used to log into JIRA',
-                        type=str,
-                        dest='user')
-
-    parser.add_argument('-PASS', '--JIRA-PASSWORD',
-                        action='store',
-                        help='Password used to log into Jira',
-                        type=str,
-                        dest='passw')
-
-    # Both of the above are passed to script via netrc?
-
-    parser.add_argument('-SAVE', '--save-location',
-                        action='store',
-                        help='Where to save output files, default will be "./"',
-                        type=str,
-                        dest='save')
-
-    option = parser.parse_args(args)
-    return option
+def dotloader():
+    load_dotenv("../env")
+    jira_user = os.getenv('JIRA_USER')
+    jira_pass = os.getenv('JIRA_PASS')
+    return jira_user, jira_pass
 
 
 def reg_full_name(db_name):
@@ -332,7 +303,7 @@ def record_maker(issue):
 
 # Perhaps a function to check whether theres already a file here would be a good idea?
 
-def tsv_file_append(record, location, option):
+def tsv_file_append(record, location):
     """
     appends rather than overwrites
     :return:
@@ -341,7 +312,7 @@ def tsv_file_append(record, location, option):
     todays_date = today.strftime("%d%m%y")
 
     file_name = f'{location}jira_dump.tsv'
-    print('writing')
+
     with open(file_name, 'a+', newline='') as end_file:
         tsv_out = csv.writer(end_file, delimiter='\t')
         tsv_out.writerow(record)
@@ -411,14 +382,20 @@ def main():
     Main function to control essential aspects of script
     :return:
     """
-    option = parse_command_args()
-    if option.save:
-        location = option.save
-    else:
-        location = "../grit-boot/output/"
+    user, password = dotloader()
+
+    location = "../grit-boot/output/"
+
+    file_name = f'{location}jira_dump.tsv'
+    print(f'writing - {file_name}')
+
+    if path.exists(file_name):
+        os.popen(f"rm {file_name}*")
+
+    os.popen(f"touch {file_name}")
 
     jira = "https://grit-jira.sanger.ac.uk"  # Base url
-    auth_jira = JIRA(jira, basic_auth=(option.user, option.passw))  # Auth
+    auth_jira = JIRA(jira, basic_auth=(user, password))  # Auth
 
     # Jira JQL search for tickets that are past the curation stage
     projects = auth_jira.search_issues('project = "Assembly curation" and status = Done OR status = Submitted OR '
@@ -462,7 +439,7 @@ def main():
                           chr_naming, ex_sex, ob_sex, cur_auto, cur_allo]
 
                 if type(record[0]) == str:
-                    file_name = tsv_file_append(record, location, option)
+                    file_name = tsv_file_append(record, location)
                     print(record)
                     print(f'---- END OF {issue} ------')
                 else:
