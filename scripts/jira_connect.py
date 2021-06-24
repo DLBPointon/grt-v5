@@ -20,7 +20,7 @@ from prefix_assignments import master_dict, dl_dict
 # Add logging
 
 def dotloader():
-    load_dotenv("../env")
+    load_dotenv("../.env")
     jira_user = os.getenv('JIRA_USER')
     jira_pass = os.getenv('JIRA_PASS')
     return jira_user, jira_pass
