@@ -14,6 +14,7 @@ function tabulatortable() {
         paginationSize: 20,
         movableColumns: true,
         layout:'fitColumns',
+        groupBy:"prefix_dl",
         columns: [
             {
                 title: "Sample ID",
