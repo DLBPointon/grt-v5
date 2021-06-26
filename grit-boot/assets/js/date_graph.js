@@ -21,6 +21,7 @@ function dategrapher() {
         var x = [];
         var y = [];
         var c = [];
+        var label = [];
         data.forEach((item) => {
 
              x.push(item[two]);
@@ -35,6 +36,8 @@ function dategrapher() {
              }
 
              c.push(item[one]);
+
+             label.push(item['sample_id'])
         });
 
         var trace1 = {
@@ -42,6 +45,7 @@ function dategrapher() {
             mode: 'markers',
             x: x,
             y:y,
+            text: label,
             transforms: [{
                 type: 'groupby',
                 groups: c

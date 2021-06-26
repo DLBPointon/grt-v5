@@ -51,7 +51,6 @@ function makegraph_2() {
 
 
         var layout = {
-            title: 'Graph showing '+ one + ' and ' + two + ' coloured by ' + three,
             xaxis: {
                 showgrid: false,
                 showline: true,

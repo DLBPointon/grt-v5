@@ -21,6 +21,7 @@
     window.onload=function(){
         rowcount();
         latest_date();
+        connection();
         makegraph();
         makegraph_2();
         makegraph_box();
@@ -97,11 +98,23 @@
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
-                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Database</span></div>
+                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Database connection:</span></div>
                                             <script>
-
+                                                function connection() {
+                                                    var url = 'http://172.27.21.37:3000/gritdata?limit=1'
+                                                    fetch(url)
+                                                        .then(async (data) => {
+                                                            if (data.ok) {
+                                                                document.getElementById("db_con").innerHTML = "Online";
+                                                                document.getElementById("db_con").style.color = "green";
+                                                            } else {
+                                                                document.getElementById("db_con").innerHTML = "Offline";
+                                                                document.getElementById("db_con").style.color = "red";
+                                                            }
+                                                        }).catch(e => console.error('EXCEPTION: ', e))
+                                                }
                                             </script>
-                                            <div class="text-dark font-weight-bold h5 mb-0">Database connection: ? <span id="db_con"></span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span id="db_con"></span></div>
                                         </div>
                                     </div>
                                 </div>

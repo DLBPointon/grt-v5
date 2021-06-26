@@ -1,30 +1,33 @@
-function tabulatortable() {
+function tabulatortableraw() {
 
-    var one = document.getElementById('CladeSelector');
-    prefix = one.options[one.selectedIndex].value
+    var tata = 'http://172.27.21.37:3000/gritdata?'
 
-    var tableData = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&' +
-        'select=sample_id,prefix_dl,family_name,manual_interventions,' +
-        'chromosome_assignments,chromosome_naming,expected_sex,observed_sex,' +
-        'curated_allosomes,curated_autosomes'
-
-    var table = new Tabulator("#clade", {
-        ajaxURL: tableData,
+    var table = new Tabulator("#tableLoc", {
+        ajaxURL: tata,
         pagination: 'local',
-        paginationSize: 20,
+        paginationSize: 40,
         movableColumns: true,
-        layout:'fitColumns',
-        groupBy:"prefix_dl",
+        virtualDomHoz:true,
         columns: [
             {
                 title: "Sample ID",
                 field: "sample_id",
                 headerFilter: 'input',
-                topCount: 'count'
+                topCount: 'count',
+                frozen: true
+            },
+            {
+                title: "Latin Name",
+                field: "latin",
             },
             {
                 title: "Prefix_DL",
                 field: "prefix_dl",
+                headerFilter: 'input'
+            },
+            {
+                title: "Prefix_FN",
+                field: "prefix_fn",
                 headerFilter: 'input'
             },
             {
@@ -33,9 +36,55 @@ function tabulatortable() {
                 headerFilter: 'input'
             },
             {
+                title: "Length Before",
+                field: "length_before",
+                topCalc:'sum'
+            },
+            {
+                title: "Length After",
+                field: "length_after",
+                topCalc:'sum'
+            },
+            {
+                title: "Length Change",
+                field: "length_change",
+            },
+            {
+                title: "Scaff No. Before",
+                field: "scaff_count_before",
+                topCalc:'sum'
+            },
+            {
+                title: "Scaff No. After",
+                field: "scaff_count_after",
+                topCalc:'sum'
+            },
+            {
+                title: "Scaff No. Change",
+                field: "scaff_count_change",
+            },
+            {
+                title: "Scaff N50 Before",
+                field: "scaff_n50_before",
+                topCalc:'sum'
+            },
+            {
+                title: "Scaff N50 After",
+                field: "scaff_n50_after",
+                topCalc:'sum'
+            },
+            {
+                title: "Scaff N50 Change",
+                field: "scaff_n50_change",
+            },
+            {
                 title: "Manual Interventions",
                 field: "manual_interventions",
                 topCalc: 'avg'
+            },
+            {
+                title: "Seq to Chr",
+                field: "assignment",
             },
             {
                 title: "Chr Naming",
@@ -58,7 +107,7 @@ function tabulatortable() {
                 title: "C-Autosomes",
                 field: "curated_autosomes",
                 topCalc:'sum'
-            },
+            }
         ],
     });
 }
