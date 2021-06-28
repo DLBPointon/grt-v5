@@ -1,4 +1,4 @@
-function tabulatortable() {
+function tabulatortableOri() {
 
     var one = document.getElementById('CladeSelector');
     prefix = one.options[one.selectedIndex].value
