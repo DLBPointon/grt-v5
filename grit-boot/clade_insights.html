@@ -21,12 +21,12 @@
 <body id="page-top">
 <script src="assets/js/clade_main.js" type="text/javascript"></script>
 <script src="assets/js/clade_box.js" type="text/javascript"></script>
-<script src="assets/js/tabulatortable.js" type="text/javascript"></script>
+<script src="assets/js/tabulatortable-ori.js" type="text/javascript"></script>
 <script>
     window.onload=function(){
         cladegrapher();
         clade_box();
-        tabulatortable()
+        tabulatortableOri()
     }
 </script>
     <div id="wrapper">
@@ -57,7 +57,7 @@
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>SL Clade to focus on</span></div>
                                             <label for="CladeSelector"></label>
-                                            <select id="CladeSelector" onchange="cladegrapher(); clade_box(); tabulatortable()">
+                                            <select id="CladeSelector" onchange="cladegrapher(); clade_box(); tabulatortableOri()">
                                                 <option value="a" selected='selected'>
                                                     Amphibia
                                                 </option>
