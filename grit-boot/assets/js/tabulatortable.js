@@ -8,6 +8,20 @@ function tabulatortable() {
         'chromosome_assignments,chromosome_naming,expected_sex,observed_sex,' +
         'curated_allosomes,curated_autosomes'
 
+    var avgauto = function(values, data, calcparams){
+        var calc = 0
+        var notodivide = 0
+        values.forEach(function(value){
+            if (value > 0) {
+                calc = calc + value;
+                notodivide = notodivide + 1;
+                console.log(calc);
+                console.log(notodivide)
+            }
+        });
+        return calc / notodivide
+    }
+
     var table = new Tabulator("#clade", {
         ajaxURL: tableData,
         pagination: 'local',
@@ -57,7 +71,7 @@ function tabulatortable() {
             {
                 title: "C-Autosomes",
                 field: "curated_autosomes",
-                topCalc:'sum'
+                topCalc:avgauto
             },
         ],
     });
