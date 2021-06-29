@@ -32,16 +32,19 @@ def reg_full_name(db_name):
     :param db_name:
     :return:
     """
-
-    name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+\d_\d)', db_name)  # catches fAplTae1_1 from dp24_vgp_fAplTae1_1
-    if name_acc_search is None:
-        name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+\d)_', db_name)  # catches fAplTae1 from dp24_vgp_fAplTae1_asm6
+    if db_name:
+        name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+\d_\d)', db_name)  # catches fAplTae1_1 from dp24_vgp_fAplTae1_1
         if name_acc_search is None:
-            name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+)', db_name)  # catches fAplTae from dp24_vgp_fAplTae
-        else:
-            pass
+            name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+\d)_', db_name)  # catches fAplTae1 from dp24_vgp_fAplTae1_asm6
+            if name_acc_search is None:
+                name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+)', db_name)  # catches fAplTae from dp24_vgp_fAplTae
+            else:
+                pass
 
-    name_acc = name_acc_search.group(1)
+        name_acc = name_acc_search.group(1)
+    else:
+        name_acc = False
+
     return name_acc
 
 
@@ -201,6 +204,7 @@ def record_maker(issue):
         'Project': issue.fields.issuetype.name,
         'Date': issue.fields.created,
         'sample_id': issue.fields.customfield_10201,
+        'assembly_version': issue.fields.customfield_10520,
         'gEVAL_database': issue.fields.customfield_10214,
         'species_name': issue.fields.customfield_10215,
         'assembly_statistics': issue.fields.customfield_10226,
@@ -251,6 +255,11 @@ def record_maker(issue):
     for field, result in id_for_custom_field_name.items():
         if field == 'gEVAL_database':
             name_acc = reg_full_name(result)
+            if not name_acc:
+                name_acc = str(issue.fields.customfield_10201) + '_' + str(issue.fields.customfield_10510)
+            else:
+                pass
+
         if field == 'assembly_statistics':
             length_before, length_after, length_change_per = reg_length_info(result)
             n50_before, n50_after, n50_change_per = reg_n50_info(result)
