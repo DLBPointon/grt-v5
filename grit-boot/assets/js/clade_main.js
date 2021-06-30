@@ -56,7 +56,6 @@ function cladegrapher() {
 
 
         var layout = {
-            title: 'Graph showing '+ two + ' and ' + three + ' coloured by ' + four,
             xaxis: {
                 showgrid: false,
                 showline: true,
