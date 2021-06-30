@@ -29,6 +29,7 @@ function tabulatortableOri() {
         movableColumns: true,
         layout:'fitColumns',
         groupBy:"prefix_dl",
+        groupClosedShowCalcs:true,
         columns: [
             {
                 title: "Sample ID",
