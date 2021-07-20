@@ -1,5 +1,5 @@
 CREATE TABLE GritData(
-    sample_id VARCHAR(20) DEFAULT NULL,
+    sample_id VARCHAR(40) NOT NULL,
     latin VARCHAR(50) DEFAULT NULL,
     prefix_sl VARCHAR(1) DEFAULT NULL,
     prefix_dl VARCHAR(2) DEFAULT NULL,
@@ -25,5 +25,6 @@ CREATE TABLE GritData(
     expected_sex VARCHAR(2) DEFAULT NULL,
     observed_sex VARCHAR(2) DEFAULT NULL,
     curated_autosomes NUMERIC DEFAULT NULL,
-    curated_allosomes VARCHAR(3) DEFAULT NULL
+    curated_allosomes VARCHAR(3) DEFAULT NULL,
+    issue_project VARCHAR(10) NOT NULL
 );
