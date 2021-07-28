@@ -1,15 +1,15 @@
-function clade_box() {
-    var one = document.getElementById('CladeSelector');
+function clade_box_proj() {
+    var one = document.getElementById('CladeSelectorP');
     prefix = one.options[one.selectedIndex].value
 
-    var three = document.getElementById('CladeGraphSelector2Y');
+    var three = document.getElementById('CladeGraphSelector2YP');
     three = three.options[three.selectedIndex].value
 
-    var four = document.getElementById('CladeGraphSelector2C');
+    var four = document.getElementById('CladeGraphSelector2CP');
     four = four.options[four.selectedIndex].value
 
-    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&prefix_sl=in.('
-        + prefix + ')&select=family_name,prefix_dl,' + three
+    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&project_code=in.('
+        + prefix + ')&select=,family_name,prefix_dl,' + three
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -39,7 +39,7 @@ function clade_box() {
 
         var datas = [trace1];
 
-        var elmntr1 = document.getElementById("cladebox").clientWidth - 30
+        var elmntr1 = document.getElementById("cladeboxP").clientWidth - 30
 
 
         var layout = {
@@ -53,9 +53,9 @@ function clade_box() {
         };
 
         var config = {responsive: true, displayModeBar: true}
-        Plotly.react('cladebox', datas, layout, config)
+        Plotly.react('cladeboxP', datas, layout, config)
     })
 
 }
 
-clade_box()
+clade_box_proj()

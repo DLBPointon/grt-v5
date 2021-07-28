@@ -1,18 +1,18 @@
 
-function cladegrapher() {
-    var one = document.getElementById('CladeSelector');
+function cladegrapherproj() {
+    var one = document.getElementById('CladeSelectorP');
     prefix = one.options[one.selectedIndex].value
 
-    var two = document.getElementById('CladeGraphSelector1X');
+    var two = document.getElementById('CladeGraphSelector1XP');
     two = two.options[two.selectedIndex].value
 
-    var three = document.getElementById('CladeGraphSelector1Y');
+    var three = document.getElementById('CladeGraphSelector1YP');
     three = three.options[three.selectedIndex].value
 
-    var four = document.getElementById('CladeGraphSelector1C');
+    var four = document.getElementById('CladeGraphSelector1CP');
     four = four.options[four.selectedIndex].value
 
-    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&prefix_sl=in.('
+    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&project_code=in.('
         + prefix + ')&select='+ two +',family_name,prefix_dl,' + three
 
     d3.json(url, function (error, data) {
@@ -33,7 +33,7 @@ function cladegrapher() {
             c.push(item[four]);
         });
 
-        var elmnt = document.getElementById("cladetest").clientWidth - 60
+        var elmnt = document.getElementById("cladetestP").clientWidth - 60
 
         var trace1 = {
             type: 'scatter',
@@ -79,10 +79,10 @@ function cladegrapher() {
             width: elmnt
         };
         var config = {responsive: true, displayModeBar: true}
-        Plotly.react('cladetest', datas, layout, config);
+        Plotly.react('cladetestP', datas, layout, config);
         }
     )
 
 }
 
-cladegrapher()
+cladegrapherproj()

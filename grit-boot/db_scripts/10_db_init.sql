@@ -25,5 +25,6 @@ CREATE TABLE GritData(
     expected_sex VARCHAR(2) DEFAULT NULL,
     observed_sex VARCHAR(2) DEFAULT NULL,
     curated_autosomes NUMERIC DEFAULT NULL,
-    curated_allosomes VARCHAR(3) DEFAULT NULL
+    curated_allosomes VARCHAR(3) DEFAULT NULL,
+    project_code VARCHAR(6) DEFAULT NULL
 );

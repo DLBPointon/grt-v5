@@ -356,7 +356,7 @@ def tsv_file_prepender(file_name_sort):
                'length before\tlength after\tlength change\tscaff n50 before\tscaff n50 after\tscaff n50 change\t' \
                'scaff_count_before\tscaff_count_after\tscaff_count_per\tchr assignment\tassignment\t' \
                'date_in_YMD\tdate_updated\tmanual_interventions\tchrosome_named\texpected_sex\tobserved_sex\t' \
-               'curated_autosome\tcurated_allosome\n'
+               'curated_autosome\tcurated_allosome\tproject_code\n'
 
     with open(file_name_sort, 'r+') as file:
         original = file.read()
@@ -407,17 +407,16 @@ def main():
     auth_jira = JIRA(jira, basic_auth=(user, password))  # Auth
 
     # Jira JQL search for tickets that are past the curation stage
-    projects = auth_jira.search_issues('project = "Assembly curation" and status = Done OR status = Submitted OR '
+    projects = auth_jira.search_issues('project IN ("Assembly curation", "Rapid Curation") AND status = Done OR status = Submitted OR '
                                        'status = "In Submission" OR status = "Post Processing++" ORDER BY key ASC',
                                        maxResults=10000)
     # fields = ('assignee', 'summary', 'description')  # Specific Fields of interest
     file_name = ''
 
-    print(len(projects))
-
     for i in projects:
         issue = auth_jira.issue(f'{i}')  # Needs to be set before id_custom_field_name
         print(f'----STARTING {issue} ----')
+        issue_proj = str(issue).split('-')[0]
         summary = issue.fields.summary
         summary_search = re.search(r'(not being curated)', summary)
         if summary_search:
@@ -445,7 +444,7 @@ def main():
                           n50_before, n50_after, n50_change_per,
                           scaff_count_before, scaff_count_after, scaff_count_per,
                           chr_ass, ass_percent, ymd_date, date_updated, interventions,
-                          chr_naming, ex_sex, ob_sex, cur_auto, cur_allo]
+                          chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, issue_proj]
 
                 if type(record[0]) == str:
                     file_name = tsv_file_append(record, location)

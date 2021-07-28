@@ -17,6 +17,11 @@ function tabulatortableraw() {
                 frozen: true
             },
             {
+                title: "Project ID",
+                field: "project_code",
+                headerFilter: 'input'
+            },
+            {
                 title: "Latin Name",
                 field: "latin",
             },
