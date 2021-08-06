@@ -26,7 +26,8 @@
     window.onload=function(){
         cladegrapherproj();
         clade_box_proj();
-        tabulatortableOri()
+        tabulatortableOri();
+        rowcount()
     }
 </script>
     <div id="wrapper">
@@ -49,9 +50,6 @@
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <h2>=============================================</h2>
-                <h2>- IN TESTING - FIRST ODD ASSEMBLIES COMING SOON -</h2>
-                <h2>=============================================</h2>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-xl-3 mb-4">
@@ -61,15 +59,15 @@
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>SL Clade to focus on</span></div>
                                             <label for="CladeSelectorP"></label>
-                                            <select id="CladeSelectorP" onchange="cladegrapherproj(); clade_box_proj(); tabulatortableOri()">
+                                            <select id="CladeSelectorP" onchange="cladegrapherproj(); clade_box_proj(); tabulatortableOri(); rowcount()">
                                                 <option value="GRIT" selected='selected'>
-                                                    Assembly Curation (Standard)
+                                                    GRIT (Standard)
                                                 </option>
                                                 <option value="RC">
                                                     Rapid Curation
                                                 </option>
                                                 <option value="ASG">
-                                                    Aquatic Symbiosis Group (NOT WORKING YET)
+                                                    ASG (TESTING)
                                                 </option>
                                             </select>
                                             <div class="text-dark font-weight-bold h5 mb-0"><span id="slfocus"></span></div>
@@ -83,9 +81,24 @@
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
-                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>SOME OTHER DATA?</span></div>
+                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>ROWS OF DATA FOR THIS SELECTION:</span></div>
+                                            <script>
+                                                function rowcount() {
+                                                    var one = document.getElementById('CladeSelectorP');
+                                                    prefix = one.options[one.selectedIndex].value
 
-                                            <div class="text-dark font-weight-bold h5 mb-0"><span id="what else?"></span></div>
+                                                    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&project_code=in.('
+                                                    + prefix + ')'
+
+                                                    d3.json(url, function (error, data) {
+                                                        if (error) return console.warn(error);
+                                                        number = Object.keys(data).length;
+                                                        console.log(number)
+                                                        document.getElementById("rowscounted2").innerHTML=JSON.stringify(number);
+                                                    })
+                                                }
+                                            </script>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span id="rowscounted2"></span></div>
                                         </div>
                                     </div>
                                 </div>

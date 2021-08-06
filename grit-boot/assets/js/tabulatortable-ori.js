@@ -1,12 +1,9 @@
 function tabulatortableOri() {
 
-    var one = document.getElementById('CladeSelector');
-    prefix = one.options[one.selectedIndex].value
-
     var tableData = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&' +
         'select=sample_id,prefix_dl,family_name,manual_interventions,' +
         'chromosome_assignments,chromosome_naming,expected_sex,observed_sex,' +
-        'curated_allosomes,curated_autosomes'
+        'curated_allosomes,curated_autosomes,project_code'
 
     var avgauto = function(values, data, calcparams){
         var calc = 0
@@ -40,6 +37,11 @@ function tabulatortableOri() {
             {
                 title: "Prefix_DL",
                 field: "prefix_dl",
+                headerFilter: 'input'
+            },
+            {
+                title: "Project",
+                field: "project_code",
                 headerFilter: 'input'
             },
             {
@@ -77,3 +79,5 @@ function tabulatortableOri() {
         ],
     });
 }
+
+tabulatortableOri()

@@ -9,7 +9,7 @@ function clade_box_proj() {
     four = four.options[four.selectedIndex].value
 
     var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&project_code=in.('
-        + prefix + ')&select=,family_name,prefix_dl,' + three
+        + prefix + ')&select=family_name,prefix_dl,' + three
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

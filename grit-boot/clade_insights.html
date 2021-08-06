@@ -26,7 +26,8 @@
     window.onload=function(){
         cladegrapher();
         clade_box();
-        tabulatortableOri()
+        tabulatortableOri();
+        rowcount()
     }
 </script>
     <div id="wrapper">
@@ -58,7 +59,7 @@
                                         <div class="col mr-2">
                                             <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>SL Clade to focus on</span></div>
                                             <label for="CladeSelector"></label>
-                                            <select id="CladeSelector" onchange="cladegrapher(); clade_box(); tabulatortableOri()">
+                                            <select id="CladeSelector" onchange="cladegrapher(); clade_box(); tabulatortableOri(); rowcount()">
                                                 <option value="a" selected='selected'>
                                                     Amphibia
                                                 </option>
@@ -149,9 +150,24 @@
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
-                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>SOME OTHER DATA?</span></div>
+                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>ROWS OF DATA FOR THIS SELECTION:</span></div>
+                                            <script>
+                                                function rowcount() {
+                                                    var one = document.getElementById('CladeSelector');
+                                                    prefix = one.options[one.selectedIndex].value
 
-                                            <div class="text-dark font-weight-bold h5 mb-0"><span id="what else?"></span></div>
+                                                    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&prefix_sl=in.('
+                                                    + prefix + ')'
+
+                                                    d3.json(url, function (error, data) {
+                                                        if (error) return console.warn(error);
+                                                        number = Object.keys(data).length;
+                                                        console.log(number)
+                                                        document.getElementById("rowscounted3").innerHTML=JSON.stringify(number);
+                                                    })
+                                                }
+                                            </script>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span id="rowscounted3"></span></div>
                                         </div>
                                     </div>
                                 </div>
