@@ -33,18 +33,24 @@ def reg_full_name(db_name):
     :return:
     """
     if db_name:
-        name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+\d_\d)', db_name)  # catches fAplTae1_1 from dp24_vgp_fAplTae1_1
+        name_acc_search = re.search(r'dtol_([a-z]*[A-Z]\w+)', db_name)  # catches idAnoDarlJC_H15_27_1 from yy5_dtol_idAnoDarlJC_H15_27_1
         if name_acc_search is None:
-            name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+\d)_', db_name)  # catches fAplTae1 from dp24_vgp_fAplTae1_asm6
+            print(1)
+            name_acc_search = re.search(r'.*_.*_([a-z]*[A-Z]\w+\d_\d)', db_name)  # catches fAplTae1_1 from dp24_vgp_fAplTae1_1
             if name_acc_search is None:
-                name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+)', db_name)  # catches fAplTae from dp24_vgp_fAplTae
-            else:
-                pass
+                print(2)
+                name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+\d)_', db_name)  # catches fAplTae1 from dp24_vgp_fAplTae1_asm6
+                if name_acc_search is None:
+                    print(3)
+                    name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+)', db_name)  # catches fAplTae from dp24_vgp_fAplTae
+                else:
+                    pass
 
         name_acc = name_acc_search.group(1)
     else:
         name_acc = False
-
+    print(db_name)
+    print(name_acc)
     return name_acc
 
 
@@ -164,11 +170,15 @@ def reg_make_prefix(sample_name):
     :param sample_name:
     :return:
     """
-    prefix_search = re.search(r'([a-z])', sample_name)
-    prefix = prefix_search.group(1)
+    if sample_name.startswith('CAM'):
+        prefix = 'i'
+        prefix_v = 'il'
+    else:
+        prefix_search = re.search(r'([a-z])', sample_name)
+        prefix = prefix_search.group(1)
 
-    prefix_v_search = re.search(r'([a-z]*)', sample_name)
-    prefix_v = prefix_v_search.group(1)
+        prefix_v_search = re.search(r'([a-z]*)', sample_name)
+        prefix_v = prefix_v_search.group(1)
 
     prefix_full = ''
 
@@ -435,7 +445,6 @@ def main():
                 name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
                 n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
                 date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo = record_maker(issue)
-
                 prefix, prefix_v, prefix_label = reg_make_prefix(name_acc)
 
                 record = [name_acc, lat_name, prefix, prefix_v, prefix_label, family_data,
