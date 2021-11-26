@@ -392,8 +392,11 @@ def tsv_file_check(file_name_sort):
         lines = ofile.readlines()
     with open(file_name_sort, 'w') as cfile:
         for line in lines:
-            if re.match('[a-z]', line) is not None or re.match('#', line) is not None:
-                cfile.write(line)
+            if len(line) < 100:
+                pass
+            else:
+                if re.match('[a-z]', line) is not None or re.match('#', line) is not None:
+                    cfile.write(line)
 
 
 def main():
