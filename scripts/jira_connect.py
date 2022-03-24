@@ -175,7 +175,7 @@ def reg_make_prefix(sample_name):
         prefix_v = 'il'
     elif sample_name.startswith('PS'):
         prefix = 'n'
-        prefix = 'nx'
+        prefix_v = 'nx'
     else:
         prefix_search = re.search(r'([a-z])', sample_name)
         prefix = prefix_search.group(1)
