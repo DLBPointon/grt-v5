@@ -49,8 +49,8 @@ def reg_full_name(db_name):
         name_acc = name_acc_search.group(1)
     else:
         name_acc = False
-    print(db_name)
-    print(name_acc)
+    #print(db_name)
+    #print(name_acc)
     return name_acc
 
 
