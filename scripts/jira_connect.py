@@ -465,7 +465,7 @@ def main():
                     file_name = tsv_file_append(record, location)
                     # print(record) <- This is used for the console printing of verbose information, seeing as it is recorded in the log file it isn't needed.
                     # Makes it a bit harder to trouble shoot via console too.
-                    print(f'---- END OF {issue} ------')
+                    # print(f'---- END OF {issue} ------')
                 else:
                     pass
     print('SORTING')
