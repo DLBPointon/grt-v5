@@ -405,7 +405,7 @@ def tsv_file_check(file_name_sort):
             if len(line) < 100:
                 pass
             else:
-                if re.match('[a-z]', line) is not None or re.match('#', line) is not None:
+                if re.match('[a-z]*[A-Z]', line) is not None or re.match('#', line) is not None:
                     cfile.write(line)
 
 
