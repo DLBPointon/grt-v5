@@ -220,12 +220,11 @@ def record_maker(issue):
         'assembly_version': issue.fields.customfield_10520,
         'gEVAL_database': issue.fields.customfield_10214,
         'species_name': issue.fields.customfield_10215,
-        'assembly_statistics': issue.fields.customfield_10226,
+        'assembly_statistics': issue.fields.customfield_10226, # This will stop some tickets being taken into the DB, a ticket can be in post-processing and not have stats yet.
         'chromosome_result': issue.fields.customfield_10233,
         'curator': issue.fields.customfield_10300,
         'hic_kit': issue.fields.customfield_10511,
         'lat_name': issue.fields.customfield_10215
-
     }
 
     interaction_list = {
