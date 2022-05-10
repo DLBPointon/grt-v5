@@ -430,8 +430,8 @@ def main():
     auth_jira = JIRA(jira, basic_auth=(user, password))  # Auth
 
     # Jira JQL search for tickets that are past the curation stage
-    projects = auth_jira.search_issues('project IN ("Assembly curation", "Rapid Curation") AND status = Done OR status = Submitted OR '
-                                        'status = "In Submission" OR status = "Post Processing++" ORDER BY key ASC',
+    projects = auth_jira.search_issues('project IN ("Assembly curation", "Rapid Curation") AND status IN (Done, Submitted, '
+                                        '"In Submission", "Post Processing++") ORDER BY key ASC',
                                         maxResults=10000)
     # fields = ('assignee', 'summary', 'description')  # Specific Fields of interest
     file_name = ''
