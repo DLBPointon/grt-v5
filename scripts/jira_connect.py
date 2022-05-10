@@ -267,11 +267,18 @@ def record_maker(issue):
 
     for field, result in id_for_custom_field_name.items():
         if field == 'gEVAL_database':
-            name_acc = reg_full_name(result)
-            if not name_acc:
-                name_acc = str(issue.fields.customfield_10201) + '_' + str(issue.fields.customfield_10510)
+            if not issue.fields.customfield_10201 == 'aBomBom1':
+                name_acc = reg_full_name(result)
+                if not name_acc:
+                    name_acc = str(issue.fields.customfield_10201) + '_' + str(issue.fields.customfield_10510)
+                else:
+                    pass
             else:
-                pass
+                try:
+                    name_acc = str(issue.fields.customfield_10201) + '_' + str(issue.fields.customfield_10510)
+                except:
+                    pass
+
 
         if field == 'assembly_statistics':
             length_before, length_after, length_change_per = reg_length_info(result)
