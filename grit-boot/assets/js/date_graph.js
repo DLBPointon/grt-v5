@@ -14,13 +14,14 @@ function dategrapher() {
 
     var labels = 'sample_id'
 
-    var url = 'http://localhost:3000/gritdata?select='+one+','+two+','+three+','+four+','+labels
+    var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three+','+four+','+labels
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
         var x = [];
         var y = [];
         var c = [];
+        var label = [];
         data.forEach((item) => {
 
              x.push(item[two]);
@@ -35,6 +36,8 @@ function dategrapher() {
              }
 
              c.push(item[one]);
+
+             label.push(item['sample_id'])
         });
 
         var trace1 = {
@@ -42,6 +45,7 @@ function dategrapher() {
             mode: 'markers',
             x: x,
             y:y,
+            text: label,
             transforms: [{
                 type: 'groupby',
                 groups: c
@@ -49,6 +53,8 @@ function dategrapher() {
         };
 
         var datas = [trace1]
+
+        var elmntdg = document.getElementById("dategraphLoc").clientWidth - 30
 
         var layout = {
             title: 'Time Series of with Rangeslider',
@@ -77,7 +83,8 @@ function dategrapher() {
             },
             yaxis: {
                 autorange: true
-            }
+            },
+            width: elmntdg
         };
 
         var config = {responsive: true, displayModeBar: true}

@@ -1,17 +1,15 @@
-TESTER = document.getElementById('rightgraph1');
+function clade_box() {
+    var one = document.getElementById('CladeSelector');
+    prefix = one.options[one.selectedIndex].value
 
-function makegraph_box() {
-
-    var two = document.getElementById('RightGraphSelector1Y');
-    two = two.options[two.selectedIndex].value
-    var three = document.getElementById('RightGraphSelector1C');
+    var three = document.getElementById('CladeGraphSelector2Y');
     three = three.options[three.selectedIndex].value
 
-    if (two === 'mipergb') {
-        var url = 'http://172.27.21.37:3000/gritdata?select=manual_interventions,'+three+',length_after'
-    } else {
-        var url = 'http://172.27.21.37:3000/gritdata?select='+two+','+three
-    }
+    var four = document.getElementById('CladeGraphSelector2C');
+    four = four.options[four.selectedIndex].value
+
+    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&prefix_sl=in.('
+        + prefix + ')&select=family_name,prefix_dl,' + three
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -20,12 +18,13 @@ function makegraph_box() {
 
 
         data.forEach((item) => {
-            if (two === 'mipergb') {
+            if (three.includes('length_after')) {
                 y.push((item['manual_interventions']/item['length_after'])*1000000000)
             } else {
-                y.push(item[two]);
+                y.push(item[three]);
             }
-            c.push(item[three]);
+
+            c.push(item[four]);
         });
 
         var trace1 = {
@@ -40,7 +39,7 @@ function makegraph_box() {
 
         var datas = [trace1];
 
-        var elmntr1 = document.getElementById("rightgraph1").clientWidth - 30
+        var elmntr1 = document.getElementById("cladebox").clientWidth - 30
 
 
         var layout = {
@@ -54,8 +53,9 @@ function makegraph_box() {
         };
 
         var config = {responsive: true, displayModeBar: true}
-        Plotly.react('rightgraph1', datas, layout, config)
+        Plotly.react('cladebox', datas, layout, config)
     })
+
 }
 
-makegraph_box()
+clade_box()

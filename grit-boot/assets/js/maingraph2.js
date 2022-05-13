@@ -1,20 +1,5 @@
 TESTER = document.getElementById('maingraph2');
 
-function rand_colour () {
-    var r = Math.random()*255;
-    var g = Math.random()*255;
-    var b = Math.random()*255;
-    return 'rgb('+r+','+g+','+b+')'
-}
-
-var colour_map = []
-
-function getColour(project) {
-    if (project in colour_map) {return colour_map[project]}
-        colour_map[project] = rand_colour();
-    return colour_map[project]
-}
-
 function makegraph_2() {
 
     var one = document.getElementById('MainGraphSelector2X');
@@ -23,7 +8,7 @@ function makegraph_2() {
     two = two.options[two.selectedIndex].value
     var three = 'project_type'
 
-    var url = 'http://localhost:3000/gritdata?select='+one+','+two+','+three
+    var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -33,7 +18,13 @@ function makegraph_2() {
 
         data.forEach((item) => {
             x.push(item[one]);
-            y.push(item[two]);
+
+            if (two.includes('length_after')) {
+                y.push((item['manual_interventions']/item['length_after'])*1000000000)
+            } else {
+                y.push(item[two]);
+            }
+
             c.push(item[three]);
         });
 
@@ -56,8 +47,10 @@ function makegraph_2() {
 
         var datas = [trace1];
 
+        var elmnt = document.getElementById("maingraph2").clientWidth - 60
+
+
         var layout = {
-            title: 'Graph showing '+ one + ' and ' + two + ' coloured by ' + three,
             xaxis: {
                 showgrid: false,
                 showline: true,
@@ -70,14 +63,15 @@ function makegraph_2() {
                 tickcolor: 'rgb(102, 102, 102)'
             },
             margin: {
-                    l: 25,
+                    l: 50,
                     r: 0,
             },
             legend: {
                 font: {size: 8,},
                 yanchor: 'middle',
                 xanchor: 'right'
-            }
+            },
+            width: elmnt
         };
         var config = {responsive: true, displayModeBar: true}
         Plotly.react('maingraph2', datas, layout, config);

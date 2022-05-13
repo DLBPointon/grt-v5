@@ -5,7 +5,7 @@ function makegraph_pie() {
     var one = document.getElementById('RightGraphSelector2X');
     one = one.options[one.selectedIndex].value
 
-    var url = 'http://localhost:3000/gritdata?select='+one
+    var url = 'http://172.27.21.37:3000/gritdata?select='+one
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -28,8 +28,18 @@ function makegraph_pie() {
         type:'pie'
         }];
 
+        var elmntr2 = document.getElementById("rightgraph2").clientWidth - 30
+
         var layout = {
+            width: elmntr2,
+            autosize: true,
+            margin: {
+                l: 50,
+                r: 50,
+                t: 0
+            },
         };
+
 
         var config = {responsive: true, displayModeBar: true}
         Plotly.react('rightgraph2', datas, layout, config);

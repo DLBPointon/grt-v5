@@ -169,28 +169,20 @@ Spinning down the containers occurs with:
 #### 4 - Updating the db
 
 Due to the requirement of this project to be pulling jira_db data in realtime
-(realistically the db will only NEED to be updated once per day due to 
+(realistically the db will only NEED to be updated once per day at the moment due to 
 the number of tickets moving through the GRIT pipeline). 
 I believe it is beneficial to have the updating script run as a crontab job.
 
 `crontab -e`
 
-`8 * * * 0,1,2,3,4 {PYTHON LIB} jira_2_db_update.py {JIRA_USER} {JIRA_PASS}`
+```
+* 8 * * * bash /home/grit/grt-v5/updater_cron.sh >> 
+/home/grit/grt-v5/logs/`date +\%Y-\%m-\%d_\%H:\%M`.log 2>&1
+```
 
 This will directly update the psql database via calls to the JIRA_API and then the grt-API.
 </details>
 
 ## TO-DO List
-Updated 28/05/2021
-
-|Job | Done? |
-| :---: | :---: |
-| Website Security | [ ]|
-| Docker Secrets - multiple files to compose | [ ]|
-| ^- psql secrets | [ ]|
-| ^- psqlREST secrets | [ ]|
-| ^- nginx secrets | [ ]|
-| chr assignment still needs parsing |[ ]|
-| Graph borders need cleaning and pushing inside of the border | [ ]|
-| Docker-compose volumes need making generic | [ ]|
+Found on the issues page
 

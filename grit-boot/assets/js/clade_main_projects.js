@@ -1,21 +1,19 @@
-TESTER = document.getElementById('test');
 
-function makegraph() {
+function cladegrapherproj() {
+    var one = document.getElementById('CladeSelectorP');
+    prefix = one.options[one.selectedIndex].value
 
-    var one = document.getElementById('MainGraphSelector1X');
-    one = one.options[one.selectedIndex].value
-    var two = document.getElementById('MainGraphSelector1Y');
+    var two = document.getElementById('CladeGraphSelector1XP');
     two = two.options[two.selectedIndex].value
-    var three = document.getElementById('MainGraphSelector1C');
+
+    var three = document.getElementById('CladeGraphSelector1YP');
     three = three.options[three.selectedIndex].value
 
-    if (two === 'mipergb') {
-        var url = 'http://172.27.21.37:3000/gritdata?select='+one+',manual_interventions,'+three+',length_after'
-             } else {
-        var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
-             }
+    var four = document.getElementById('CladeGraphSelector1CP');
+    four = four.options[four.selectedIndex].value
 
-
+    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&project_code=in.('
+        + prefix + ')&select='+ two +',family_name,prefix_dl,' + three
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -24,16 +22,18 @@ function makegraph() {
         var c = [];
 
         data.forEach((item) => {
-            x.push(item[one]);
+            x.push(item[two]);
 
-            if (two === 'mipergb') {
+            if (three.includes('length_after')) {
                 y.push((item['manual_interventions']/item['length_after'])*1000000000)
             } else {
-                y.push(item[two]);
+                y.push(item[three]);
             }
 
-            c.push(item[three]);
+            c.push(item[four]);
         });
+
+        var elmnt = document.getElementById("cladetestP").clientWidth - 60
 
         var trace1 = {
             type: 'scatter',
@@ -44,17 +44,16 @@ function makegraph() {
                 type: 'groupby',
                 groups: c
             }],
-            name: 'maingraph1',
+            name: 'cladegraph',
             marker: {
                 line: {width: 1,},
                 symbol: 'circle',
                 size: 5
             }
-        };
+        }
 
         var datas = [trace1];
 
-        var elmnt = document.getElementById("test").clientWidth - 30
 
         var layout = {
             xaxis: {
@@ -70,22 +69,20 @@ function makegraph() {
             },
             margin: {
                     l: 50,
-                    r: 50,
-                    b: 100
+                    r: 0,
             },
             legend: {
                 font: {size: 8,},
                 yanchor: 'middle',
                 xanchor: 'right'
             },
-            autosize: true,
             width: elmnt
         };
         var config = {responsive: true, displayModeBar: true}
-        Plotly.newPlot('test', datas, layout, config);
+        Plotly.react('cladetestP', datas, layout, config);
         }
     )
+
 }
 
-makegraph()
-
+cladegrapherproj()

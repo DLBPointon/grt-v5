@@ -8,7 +8,7 @@ function gevalgraph3() {
     var two = 'scaff_count_change';
     var four = 'length_after';
 
-    var url = 'http://localhost:3000/gritdata?select=' + one + ',' + two + ',' + three + ',' + four;
+    var url = 'http://172.27.21.37:3000/gritdata?select=' + one + ',' + two + ',' + three + ',' + four;
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -38,6 +38,8 @@ function gevalgraph3() {
 
         var datas = [trace1];
 
+        var elmntgg3 = document.getElementById("gevalgraph3").clientWidth - 30
+
         var layout = {
             title: 'Scaff count change (%) by Assembly size (normalised to 1000Mb)',
                 xaxis: {
@@ -45,7 +47,8 @@ function gevalgraph3() {
                 },
                 yaxis: {
                     title: 'Scaff count change (%)'
-                }
+                },
+            width: elmntgg3
 
         };
 

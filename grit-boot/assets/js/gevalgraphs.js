@@ -8,7 +8,7 @@ function gevalgraph1() {
     var two = 'manual_interventions';
     var four = 'length_after';
 
-    var url = 'http://localhost:3000/gritdata?select=' + one + ',' + two + ',' + three + ',' + four;
+    var url = 'http://172.27.21.37:3000/gritdata?select=' + one + ',' + two + ',' + three + ',' + four;
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -38,15 +38,17 @@ function gevalgraph1() {
 
         var datas = [trace1];
 
+        var elmntgg1 = document.getElementById("gevalgraph1").clientWidth - 30
+
         var layout = {
             title: 'Manual Interventions (normalised to 1000Mb) by Assembly size (normalised to 1000Mb)',
-                xaxis: {
+            xaxis: {
                     title: 'Assembly Size (normalised to 1000Mb)'
                 },
-                yaxis: {
+            yaxis: {
                     title: 'Manual Interventions (normalised to 1000mb'
-                }
-
+                },
+            width: elmntgg1
         };
 
         var config = {responsive: true, displayModeBar: true}
