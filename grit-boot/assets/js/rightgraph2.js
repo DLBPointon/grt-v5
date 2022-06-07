@@ -1,5 +1,3 @@
-TESTER = document.getElementById('rightgraph2');
-
 function makegraph_pie() {
 
     var one = document.getElementById('RightGraphSelector2X');
