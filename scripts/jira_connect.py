@@ -242,6 +242,11 @@ def record_maker(issue):
         'curated_allosomes': issue.fields.customfield_10516
     }
 
+    telomere_data = {
+        'telo_motif': issue.fields.customfield_10701,
+        'telo_len': issue.fields.customfield_10702
+    }
+
     name_acc = ''
     length_before = 0
     length_after = 0
@@ -263,6 +268,8 @@ def record_maker(issue):
     ob_sex = ''
     cur_allo = ''
     cur_auto = 0
+    telo_motif = ''
+    telo_len = 0
 
     for field, result in id_for_custom_field_name.items():
         if field == 'gEVAL_database':
@@ -322,11 +329,20 @@ def record_maker(issue):
                 else:
                     cur_allo = str(result)
 
+    for field, result in telomere_data.items():
+        if result is None:
+            pass
+        else:
+            if field == 'telo_motif':
+                telo_motif = str(result)
+            elif field == 'telo_len':
+                telo_len = int(result)
+
     date_updated = date.today()
 
     return name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
             n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
-            date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo
+            date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, telo_motif, telo_len
 
 
 # Perhaps a function to check whether theres already a file here would be a good idea?
@@ -375,7 +391,7 @@ def tsv_file_prepender(file_name_sort):
                 'length before\tlength after\tlength change\tscaff n50 before\tscaff n50 after\tscaff n50 change\t' \
                 'scaff_count_before\tscaff_count_after\tscaff_count_per\tchr assignment\tassignment\t' \
                 'date_in_YMD\tdate_updated\tmanual_interventions\tchrosome_named\texpected_sex\tobserved_sex\t' \
-                'curated_autosome\tcurated_allosome\tproject_code\n'
+                'curated_autosome\tcurated_allosome\tproject_code\ttelo_motif\ttelo_length\n'
 
     with open(file_name_sort, 'r+') as file:
         original = file.read()
@@ -456,7 +472,7 @@ def main():
 
                 name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
                 n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
-                date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo = record_maker(issue)
+                date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, telo_motif, telo_len = record_maker(issue)
                 prefix, prefix_v, prefix_label = reg_make_prefix(name_acc)
 
                 record = [name_acc, lat_name, prefix, prefix_v, prefix_label, family_data,
@@ -465,7 +481,7 @@ def main():
                             n50_before, n50_after, n50_change_per,
                             scaff_count_before, scaff_count_after, scaff_count_per,
                             chr_ass, ass_percent, ymd_date, date_updated, interventions,
-                            chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, issue_proj]
+                            chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, issue_proj, telo_motif, telo_len]
 
                 if type(record[0]) == str:
                     file_name = tsv_file_append(record, location)
