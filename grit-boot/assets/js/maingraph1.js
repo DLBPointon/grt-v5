@@ -11,9 +11,9 @@ function makegraph() {
 
     if (two === 'mipergb') {
         var url = 'http://172.27.21.37:3000/gritdata?select='+one+',manual_interventions,'+three+',length_after'
-             } else {
+            } else {
         var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
-             }
+            }
 
 
 

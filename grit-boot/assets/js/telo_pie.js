@@ -1,9 +1,7 @@
 function telo_pie() {
 
-    //var one = document.getElementById('telo_selector1');
-    //one = one.options[one.selectedIndex].value
-
-    var one = 'project_type'
+    var one = document.getElementById('telo_selector1');
+    one = one.options[one.selectedIndex].value
 
     var url = 'http://172.27.21.37:3000/gritdata?select='+one
 
