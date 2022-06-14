@@ -14,7 +14,7 @@ function dategrapher() {
 
     var labels = 'sample_id'
 
-    var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three+','+four+','+labels
+    var url = 'http://grit-realtime.tol.sanger.ac.uk:8001/gritdata?select='+one+','+two+','+three+','+four+','+labels
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -24,20 +24,20 @@ function dategrapher() {
         var label = [];
         data.forEach((item) => {
 
-             x.push(item[two]);
+                x.push(item[two]);
 
-             if (item[three] === 'manual_interventions') {
-                 y.push((item[three]/item[four])*1000000000)
-             } else if (item[three] === 'length_after'){
-                 y.push(item[three]);
-                 console.log(y)
-             } else {
-                 y.push(item[three])
-             }
+                if (item[three] === 'manual_interventions') {
+                    y.push((item[three]/item[four])*1000000000)
+                } else if (item[three] === 'length_after'){
+                    y.push(item[three]);
+                    console.log(y)
+                } else {
+                    y.push(item[three])
+                }
 
-             c.push(item[one]);
+                c.push(item[one]);
 
-             label.push(item['sample_id'])
+                label.push(item['sample_id'])
         });
 
         var trace1 = {

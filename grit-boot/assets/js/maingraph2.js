@@ -8,7 +8,7 @@ function makegraph_2() {
     two = two.options[two.selectedIndex].value
     var three = 'project_type'
 
-    var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
+    var url = 'http://grit-realtime.tol.sanger.ac.uk:8001/gritdata?select='+one+','+two+','+three
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

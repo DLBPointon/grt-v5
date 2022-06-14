@@ -1,6 +1,6 @@
 function tabulatortableraw() {
 
-    var tata = 'http://172.27.21.37:3000/gritdata?'
+    var tata = 'http://grit-realtime.tol.sanger.ac.uk:8001/gritdata?'
 
     var table = new Tabulator("#tableLoc", {
         ajaxURL: tata,

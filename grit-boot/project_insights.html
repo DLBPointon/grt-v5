@@ -88,7 +88,7 @@
                                                     var one = document.getElementById('CladeSelectorP');
                                                     prefix = one.options[one.selectedIndex].value
 
-                                                    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&project_code=in.('
+                                                    var url = 'http://grit-realtime.tol.sanger.ac.uk:8001//gritdata?order=family_name.asc&project_code=in.('
                                                     + prefix + ')'
 
                                                     d3.json(url, function (error, data) {

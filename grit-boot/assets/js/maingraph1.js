@@ -10,9 +10,9 @@ function makegraph() {
     three = three.options[three.selectedIndex].value
 
     if (two === 'mipergb') {
-        var url = 'http://172.27.21.37:3000/gritdata?select='+one+',manual_interventions,'+three+',length_after'
+        var url = 'http://grit-realtime.tol.sanger.ac.uk:8001/gritdata?select='+one+',manual_interventions,'+three+',length_after'
             } else {
-        var url = 'http://172.27.21.37:3000/gritdata?select='+one+','+two+','+three
+        var url = 'http://grit-realtime.tol.sanger.ac.uk:8001/gritdata?select='+one+','+two+','+three
             }
 
 

@@ -1,6 +1,6 @@
 function tabulatortableOri() {
 
-    var tableData = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&' +
+    var tableData = 'http://grit-realtime.tol.sanger.ac.uk:8001/gritdata?order=family_name.asc&' +
         'select=sample_id,prefix_dl,family_name,manual_interventions,' +
         'chromosome_assignments,chromosome_naming,expected_sex,observed_sex,' +
         'curated_allosomes,curated_autosomes,project_code'
