@@ -157,7 +157,7 @@
                                                     var one = document.getElementById('CladeSelector');
                                                     prefix = one.options[one.selectedIndex].value
 
-                                                    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&prefix_sl=in.('
+                                                    var url = 'http://grit-realtime-api.tol.sanger.ac.uk:8001//gritdata?order=family_name.asc&prefix_sl=in.('
                                                     + prefix + ')'
 
                                                     d3.json(url, function (error, data) {
