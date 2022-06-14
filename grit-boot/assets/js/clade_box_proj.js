@@ -8,7 +8,7 @@ function clade_box_proj() {
     var four = document.getElementById('CladeGraphSelector2CP');
     four = four.options[four.selectedIndex].value
 
-    var url = 'http://grit-realtime-api.tol.sanger.ac.ukgritdata?order=family_name.asc&project_code=in.('
+    var url = 'https://grit-realtime-api.tol.sanger.ac.ukgritdata?order=family_name.asc&project_code=in.('
         + prefix + ')&select=family_name,prefix_dl,' + three
 
     d3.json(url, function (error, data) {

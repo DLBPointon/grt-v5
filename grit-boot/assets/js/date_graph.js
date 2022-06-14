@@ -14,7 +14,7 @@ function dategrapher() {
 
     var labels = 'sample_id'
 
-    var url = 'http://grit-realtime-api.tol.sanger.ac.ukgritdata?select='+one+','+two+','+three+','+four+','+labels
+    var url = 'https://grit-realtime-api.tol.sanger.ac.ukgritdata?select='+one+','+two+','+three+','+four+','+labels
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

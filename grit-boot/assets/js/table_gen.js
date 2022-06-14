@@ -1,6 +1,6 @@
 function tabler() {
 
-    var url = 'http://grit-realtime-api.tol.sanger.ac.ukgritdata?select=sample_id,prefix_sl,family_name,length_change,scaff_n50_change,scaff_count_change,manual_interventions,date_in_ymd'
+    var url = 'https://grit-realtime-api.tol.sanger.ac.ukgritdata?select=sample_id,prefix_sl,family_name,length_change,scaff_n50_change,scaff_count_change,manual_interventions,date_in_ymd'
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

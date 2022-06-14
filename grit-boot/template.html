@@ -61,7 +61,7 @@
                                             <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Rows of Data</span></div>
                                             <script>
                                                 function rowcount() {
-                                                    var url = 'http://grit-realtime-api.tol.sanger.ac.uk/gritdata'
+                                                    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata'
                                                     d3.json(url, function (error, data) {
                                                         if (error) return console.warn(error);
                                                         number = Object.keys(data).length;
@@ -84,7 +84,7 @@
                                             <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Date of last update</span></div>
                                             <script>
                                                 function latest_date() {
-                                                    var url = 'http://grit-realtime-api.tol.sanger.ac.uk/gritdata?limit=1&order=date_updated.desc&select=date_updated'
+                                                    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?limit=1&order=date_updated.desc&select=date_updated'
                                                     d3.json(url, function (error, data) {
                                                         if (error) return console.warn(error);
                                                         var date_item = JSON.stringify(data).split(":")[1].split('"');
@@ -106,7 +106,7 @@
                                             <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Database connection:</span></div>
                                             <script>
                                                 function connection() {
-                                                    var url = 'http://grit-realtime-api.tol.sanger.ac.uk/gritdata?limit=1'
+                                                    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?limit=1'
                                                     fetch(url)
                                                         .then(async (data) => {
                                                             if (data.ok) {

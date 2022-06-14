@@ -8,7 +8,7 @@ function gevalgraph4() {
     var two = 'assignment';
     var four = 'length_after';
 
-    var url = 'http://grit-realtime-api.tol.sanger.ac.ukgritdata?select=' + one + ',' + two + ',' + three + ',' + four;
+    var url = 'https:///grit-realtime-api.tol.sanger.ac.ukgritdata?select=' + one + ',' + two + ',' + three + ',' + four;
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

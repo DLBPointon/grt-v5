@@ -12,7 +12,7 @@ function cladegrapherproj() {
     var four = document.getElementById('CladeGraphSelector1CP');
     four = four.options[four.selectedIndex].value
 
-    var url = 'http://grit-realtime-api.tol.sanger.ac.ukgritdata?order=family_name.asc&project_code=in.('
+    var url = 'https://grit-realtime-api.tol.sanger.ac.ukgritdata?order=family_name.asc&project_code=in.('
         + prefix + ')&select='+ two +',family_name,prefix_dl,' + three
 
     d3.json(url, function (error, data) {
