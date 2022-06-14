@@ -1,6 +1,6 @@
 function tabulatortabletelo() {
 
-    var tata = 'https://grit-realtime-api.tol.sanger.ac.ukgritdata?'
+    var tata = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?'
 
     var table = new Tabulator("#teloTableLoc", {
         ajaxURL: tata,

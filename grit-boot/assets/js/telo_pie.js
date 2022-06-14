@@ -3,7 +3,7 @@ function telo_pie() {
     var one = document.getElementById('telo_selector1');
     one = one.options[one.selectedIndex].value
 
-    var url = 'https://grit-realtime-api.tol.sanger.ac.ukgritdata?select='+one
+    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?select='+one
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);

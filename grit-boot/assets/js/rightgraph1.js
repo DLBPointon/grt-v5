@@ -8,9 +8,9 @@ function makegraph_box() {
     three = three.options[three.selectedIndex].value
 
     if (two === 'mipergb') {
-        var url = 'https://grit-realtime-api.tol.sanger.ac.ukgritdata?select=manual_interventions,'+three+',length_after'
+        var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?select=manual_interventions,'+three+',length_after'
     } else {
-        var url = 'https://grit-realtime-api.tol.sanger.ac.ukgritdata?select='+two+','+three
+        var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?select='+two+','+three
     }
 
     d3.json(url, function (error, data) {
