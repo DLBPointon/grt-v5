@@ -43,6 +43,7 @@
                     <li class="nav-item"><a class="nav-link" href="maingraphs.html"><i class="fas fa-greater-than"></i><span>gEVAL Graphs</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="clade_insights.html"><i class="fas fa-greater-than"></i><span>Clade Insights</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="project_insights.html"><i class="fas fa-greater-than"></i><span>Project Insights</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="telo_insights.html"><i class="fas fa-greater-than"></i><span>Telomere Insights</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Table</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -87,7 +88,7 @@
                                                     var one = document.getElementById('CladeSelectorP');
                                                     prefix = one.options[one.selectedIndex].value
 
-                                                    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&project_code=in.('
+                                                    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?order=family_name.asc&project_code=in.('
                                                     + prefix + ')'
 
                                                     d3.json(url, function (error, data) {

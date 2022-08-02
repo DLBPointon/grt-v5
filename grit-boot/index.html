@@ -5,16 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - grit</title>
+    <link href="https://unpkg.com/tabulator-tables@5.2.7/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.2.7/dist/js/tabulator.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
 </head>
 
@@ -28,7 +29,8 @@
         makegraph_2();
         makegraph_box();
         makegraph_pie();
-}</script>
+    }
+</script>
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
@@ -42,6 +44,7 @@
                     <li class="nav-item"><a class="nav-link" href="maingraphs.html"><i class="fas fa-greater-than"></i><span>gEVAL Graphs</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="clade_insights.html"><i class="fas fa-greater-than"></i><span>Clade Insights</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="project_insights.html"><i class="fas fa-greater-than"></i><span>Project Insights</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="telo_insights.html"><i class="fas fa-greater-than"></i><span>Telomere Insights</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Table</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -59,7 +62,7 @@
                                             <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Rows of Data</span></div>
                                             <script>
                                                 function rowcount() {
-                                                    var url = 'http://172.27.21.37:3000/gritdata'
+                                                    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata'
                                                     d3.json(url, function (error, data) {
                                                         if (error) return console.warn(error);
                                                         number = Object.keys(data).length;
@@ -82,7 +85,7 @@
                                             <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Date of last update</span></div>
                                             <script>
                                                 function latest_date() {
-                                                    var url = 'http://172.27.21.37:3000/gritdata?limit=1&order=date_updated.desc&select=date_updated'
+                                                    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?limit=1&order=date_updated.desc&select=date_updated'
                                                     d3.json(url, function (error, data) {
                                                         if (error) return console.warn(error);
                                                         var date_item = JSON.stringify(data).split(":")[1].split('"');
@@ -104,7 +107,7 @@
                                             <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Database connection:</span></div>
                                             <script>
                                                 function connection() {
-                                                    var url = 'http://172.27.21.37:3000/gritdata?limit=1'
+                                                    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?limit=1'
                                                     fetch(url)
                                                         .then(async (data) => {
                                                             if (data.ok) {

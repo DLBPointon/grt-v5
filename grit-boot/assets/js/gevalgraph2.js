@@ -8,7 +8,7 @@ function gevalgraph2() {
     var two = 'scaff_n50_change';
     var four = 'length_after';
 
-    var url = 'http://172.27.21.37:3000/gritdata?select=' + one + ',' + two + ',' + three + ',' + four;
+    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?select=' + one + ',' + two + ',' + three + ',' + four;
 
     d3.json(url, function (error, data) {
         if (error) return console.warn(error);
@@ -18,10 +18,10 @@ function gevalgraph2() {
         var label = [];
 
         data.forEach((item) => {
-            x.push(item[four]/1000000);
+            x.push(item[four]/1000000000);
             y.push(item[two]);
             c.push(item[three]);
-            label.push(item[one])
+            label.push('Org: ' + item[one] + ' | Percent change: ' + item[two])
         });
 
         var trace1 = {
@@ -41,9 +41,9 @@ function gevalgraph2() {
         var elmntgg2 = document.getElementById("gevalgraph2").clientWidth - 30
 
         var layout = {
-            title: 'Scaff N50 count change (%) by Assembly size (normalised to 1000Mb)',
+            title: 'Scaff N50 count change (%) by Assembly size (Gb)',
                 xaxis: {
-                    title: 'Assembly Size (normalised to 1000Mb)'
+                    title: 'Assembly Size (Gb)'
                 },
                 yaxis: {
                     title: 'Scaff N50 count change (%)'

@@ -1,6 +1,6 @@
-function makegraph_pie() {
+function telo_pie() {
 
-    var one = document.getElementById('RightGraphSelector2X');
+    var one = document.getElementById('telo_selector1');
     one = one.options[one.selectedIndex].value
 
     var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?select='+one
@@ -26,7 +26,7 @@ function makegraph_pie() {
         type:'pie'
         }];
 
-        var elmntr2 = document.getElementById("rightgraph2").clientWidth - 30
+        var elmntr2 = document.getElementById("telo_right1").clientWidth - 30
 
         var layout = {
             width: elmntr2,
@@ -38,11 +38,8 @@ function makegraph_pie() {
             },
         };
 
-
         var config = {responsive: true, displayModeBar: true}
-        Plotly.react('rightgraph2', datas, layout, config);
+        Plotly.react('telo_right1', datas, layout, config);
     })
-
-
 }
 

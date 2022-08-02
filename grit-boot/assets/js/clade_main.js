@@ -12,7 +12,7 @@ function cladegrapher() {
     var four = document.getElementById('CladeGraphSelector1C');
     four = four.options[four.selectedIndex].value
 
-    var url = 'http://172.27.21.37:3000/gritdata?order=family_name.asc&prefix_sl=in.('
+    var url = 'https://grit-realtime-api.tol.sanger.ac.uk/gritdata?order=family_name.asc&prefix_sl=in.('
         + prefix + ')&select='+ two +',family_name,prefix_dl,' + three
 
     d3.json(url, function (error, data) {
