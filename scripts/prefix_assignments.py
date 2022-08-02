@@ -56,7 +56,7 @@ dl_dict = {
     'na': 'Aphelenchida', 'nd': 'Desmodorida', 'ne': 'Enoplida',
     'nf': 'unspecified_order_Adenophorea', 'ng': 'Strongylida', 'nh': 'Monhysterida', 'ni': 'Araeolaimida',
     'nl': 'Dorylaimida', 'nm': 'Mermithida', 'nn': 'Mononchida', 'no': 'Desmoscolecida', 'np': 'Diplogasterida',
-    'nr': 'Rhabditida', 'ns': 'Spirurida', 'nt': 'Trichocephalida', 'nu': 'unspecified_class_Nematoda',
+    'nr': 'Rhabditida', 'ns': 'Spirurida', 'nt': 'Trichocephalida', 'nu': 'unspecified_class_Nematoda', 'nx': 'Nematoda',
     'nw': 'Triplonchida', 'ny': 'Tylenchida', 'oc': 'Calcarea', 'od': 'Demospongiae', 'oh': 'Hexactinellida',
     'oo': 'Homoscleromorpha', 'pa': 'Amoebozoa', 'pb': 'Bigyra', 'pc': 'Cercozoa', 'pe': 'Euglenozoa',
     'pf': 'Foraminifera', 'ph': 'Phoronida', 'pi': 'Ciliophora', 'pk': 'Choanozoa', 'pm': 'Mycetozoa',
