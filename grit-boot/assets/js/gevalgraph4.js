@@ -43,7 +43,7 @@ function gevalgraph4() {
         var layout = {
             title: 'Sequence assigned to chromosome (%) by Assembly size (1Gb)',
                 xaxis: {
-                    title: 'Assembly Size (1Gb)'
+                    title: 'Assembly Size (Gb)'
                 },
                 yaxis: {
                     title: 'Sequence assigned to chromosome (%)'

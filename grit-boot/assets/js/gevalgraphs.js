@@ -43,7 +43,7 @@ function gevalgraph1() {
         var layout = {
             title: 'Manual Interventions (normalised to 1Gb) by Assembly size (Gb)',
             xaxis: {
-                    title: 'Assembly Size (1Gb)',
+                    title: 'Assembly Size (Gb)',
                 },
             yaxis: {
                     title: 'Manual Interventions (normalised to 1Gb)',
