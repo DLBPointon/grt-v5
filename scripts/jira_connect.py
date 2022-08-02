@@ -150,11 +150,12 @@ def reg_lat_name(latin_name):
 
     if response.text == 'No results.':
         family_data = 'UNKNOWN'
+    elif response.text == '[]':
+        data_lineage, family = 'NCBI ERROR', 'NCBI ERROR'
     else:
         data = response.json()
         data_lineage = data[0]['lineage']
         family = data_lineage.split('; ')
-
         family_data = family[-3]
 
     return lat_name_result, family_data
