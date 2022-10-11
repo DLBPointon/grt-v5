@@ -442,7 +442,7 @@ def main():
 
     os.popen(f"touch {file_name}")
 
-    jira = "https://grit-jira.sanger.ac.uk"  # Base url
+    jira = "https://jira.sanger.ac.uk"  # Base url
     auth_jira = JIRA(jira, basic_auth=(user, password))  # Auth
 
     # Jira JQL search for tickets that are past the curation stage
