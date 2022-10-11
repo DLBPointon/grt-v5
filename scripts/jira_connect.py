@@ -217,30 +217,30 @@ def record_maker(issue):
         'GRIT_ID': issue,
         'Project': issue.fields.issuetype.name,
         'Date': issue.fields.created,
-        'sample_id': issue.fields.customfield_10201,
-        'assembly_version': issue.fields.customfield_10520,
-        'gEVAL_database': issue.fields.customfield_10214,
-        'species_name': issue.fields.customfield_10215,
-        'assembly_statistics': issue.fields.customfield_10226, # This will stop some tickets being taken into the DB, a ticket can be in post-processing and not have stats yet.
-        'chromosome_result': issue.fields.customfield_10233,
-        'curator': issue.fields.customfield_10300,
-        'hic_kit': issue.fields.customfield_10511,
-        'lat_name': issue.fields.customfield_10215
+        'sample_id': issue.fields.customfield_11627, --
+        'assembly_version': issue.fields.customfield_11625,
+        'gEVAL_database': issue.fields.customfield_11609,
+        'species_name': issue.fields.customfield_11676,
+        'assembly_statistics': issue.fields.customfield_11608,
+        'chromosome_result': issue.fields.customfield_11645,
+        'curator': issue.fields.customfield_11657,
+        'hic_kit': issue.fields.customfield_11629,
+        'lat_name': issue.fields.customfield_11676
     }
 
     interaction_list = {
-        'manual_breaks': issue.fields.customfield_10219,
-        'manual_joins': issue.fields.customfield_10220,
-        'manual_inversions': issue.fields.customfield_10221,
-        'manual_haplotig_removals': issue.fields.customfield_10222,
+        'manual_breaks': issue.fields.customfield_11615,
+        'manual_joins': issue.fields.customfield_11681,
+        'manual_inversions': issue.fields.customfield_11610,
+        'manual_haplotig_removals': issue.fields.customfield_11632,
     }
 
     chromosome_data = {
-        'chromosome_naming_scheme': issue.fields.customfield_10218,
-        'expected_sex': issue.fields.customfield_10517,
-        'observed_sex': issue.fields.customfield_10518,
-        'curated_autosomes': issue.fields.customfield_10515,
-        'curated_allosomes': issue.fields.customfield_10516
+        'chromosome_naming_scheme': issue.fields.customfield_11607,
+        'expected_sex': issue.fields.customfield_11641,
+        'observed_sex': issue.fields.customfield_11601,
+        'curated_autosomes': issue.fields.customfield_11659,
+        'curated_allosomes': issue.fields.customfield_11617
     }
 
     telomere_data = {
