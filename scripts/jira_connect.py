@@ -32,6 +32,7 @@ def reg_full_name(db_name):
     :param db_name:
     :return:
     """
+    print(db_name)
     if db_name:
         name_acc_search = re.search(r'dtol_([a-z]*[A-Z]\w+)', db_name)  # catches idAnoDarlJC_H15_27_1 from yy5_dtol_idAnoDarlJC_H15_27_1
         if name_acc_search is None:
@@ -217,35 +218,33 @@ def record_maker(issue):
         'GRIT_ID': issue,
         'Project': issue.fields.issuetype.name,
         'Date': issue.fields.created,
-        'sample_id': issue.fields.customfield_10201,
-        'assembly_version': issue.fields.customfield_10520,
-        'gEVAL_database': issue.fields.customfield_10214,
-        'species_name': issue.fields.customfield_10215,
-        'assembly_statistics': issue.fields.customfield_10226, # This will stop some tickets being taken into the DB, a ticket can be in post-processing and not have stats yet.
-        'chromosome_result': issue.fields.customfield_10233,
-        'curator': issue.fields.customfield_10300,
-        'hic_kit': issue.fields.customfield_10511,
-        'lat_name': issue.fields.customfield_10215
+        'sample_id': issue.fields.customfield_11627,
+        'gEVAL_database': issue.fields.customfield_11643,
+        'assembly_statistics': issue.fields.customfield_11608, # This will stop some tickets being taken into the DB, a ticket can be in post-processing and not have stats yet.
+        'chromosome_result': issue.fields.customfield_11676,
+        'curator': issue.fields.customfield_11657,
+        'hic_kit': issue.fields.customfield_11629,
+        'lat_name': issue.fields.customfield_11676
     }
 
     interaction_list = {
-        'manual_breaks': issue.fields.customfield_10219,
-        'manual_joins': issue.fields.customfield_10220,
-        'manual_inversions': issue.fields.customfield_10221,
-        'manual_haplotig_removals': issue.fields.customfield_10222,
+        'manual_breaks': issue.fields.customfield_11615,
+        'manual_joins': issue.fields.customfield_11681,
+        'manual_inversions': issue.fields.customfield_10610,
+        'manual_haplotig_removals': issue.fields.customfield_11632,
     }
 
     chromosome_data = {
-        'chromosome_naming_scheme': issue.fields.customfield_10218,
-        'expected_sex': issue.fields.customfield_10517,
-        'observed_sex': issue.fields.customfield_10518,
-        'curated_autosomes': issue.fields.customfield_10515,
-        'curated_allosomes': issue.fields.customfield_10516
+        'chromosome_naming_scheme': issue.fields.customfield_11607,
+        'expected_sex': issue.fields.customfield_11641,
+        'observed_sex': issue.fields.customfield_11601,
+        'curated_autosomes': issue.fields.customfield_11659,
+        'curated_allosomes': issue.fields.customfield_11617
     }
 
     telomere_data = {
-        'telo_motif': issue.fields.customfield_10701,
-        'telo_len': issue.fields.customfield_10702
+        'telo_motif': issue.fields.customfield_11650,
+        'telo_len': issue.fields.customfield_11651
     }
 
     name_acc = ''
@@ -274,15 +273,15 @@ def record_maker(issue):
 
     for field, result in id_for_custom_field_name.items():
         if field == 'gEVAL_database':
-            if not issue.fields.customfield_10201 == 'aBomBom1':
+            if not issue.fields.customfield_11627 == 'aBomBom1':
                 name_acc = reg_full_name(result)
                 if not name_acc:
-                    name_acc = str(issue.fields.customfield_10201) + '_' + str(issue.fields.customfield_10510)
+                    name_acc = str(issue.fields.customfield_11627) + '_' + str(issue.fields.customfield_11609)
                 else:
                     pass
             else:
                 try:
-                    name_acc = str(issue.fields.customfield_10201) + '_' + str(issue.fields.customfield_10510)
+                    name_acc = str(issue.fields.customfield_11627) + '_' + str(issue.fields.customfield_11609)
                 except:
                     pass
 
@@ -442,11 +441,11 @@ def main():
 
     os.popen(f"touch {file_name}")
 
-    jira = "https://grit-jira.sanger.ac.uk"  # Base url
+    jira = "https://jira.sanger.ac.uk/"  # Base url
     auth_jira = JIRA(jira, basic_auth=(user, password))  # Auth
 
     # Jira JQL search for tickets that are past the curation stage
-    projects = auth_jira.search_issues('project IN ("Assembly curation", "Rapid Curation") AND status IN (Done, Submitted, '
+    projects = auth_jira.search_issues('project in ("ToL Assembly curation", "ToL Rapid Curation") AND status IN (Done, Submitted, '
                                         '"In Submission", "Post Processing++") ORDER BY key ASC',
                                         maxResults=10000)
     # fields = ('assignee', 'summary', 'description')  # Specific Fields of interest
@@ -463,12 +462,12 @@ def main():
             if nbc == '(not being curated)':
                 pass
         else:
-            if issue.fields.customfield_10226 is None:
+            if issue.fields.customfield_11608 is None:
                 pass
             else:
                 #  --- Block requires no parsing
                 project_type = issue.fields.issuetype
-                lat_name = issue.fields.customfield_10215
+                lat_name = issue.fields.customfield_11676
                 #  -- End of Block
 
                 name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
