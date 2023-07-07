@@ -178,6 +178,9 @@ def reg_make_prefix(sample_name):
     elif sample_name.startswith('PS'):
         prefix = 'n'
         prefix_v = 'nx'
+    elif sample_name.startwith('HG'):
+        prefix = 'm'
+        prefix_v = 'm'
     else:
         prefix_search = re.search(r'([a-z])', sample_name)
         prefix = prefix_search.group(1)
