@@ -175,12 +175,15 @@ def reg_make_prefix(sample_name):
     if sample_name.startswith('CAM'):
         prefix = 'i'
         prefix_v = 'il'
+        print(f'Non-standard: {sample_name}')
     elif sample_name.startswith('PS'):
         prefix = 'n'
         prefix_v = 'nx'
-    elif sample_name.startwith('HG'):
+        print(f'Non-standard: {sample_name}')
+    elif sample_name.startswith('HG'):
         prefix = 'm'
         prefix_v = 'm'
+        print(f'Non-standard: {sample_name}')
     else:
         prefix_search = re.search(r'([a-z])', sample_name)
         prefix = prefix_search.group(1)
