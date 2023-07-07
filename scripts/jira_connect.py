@@ -221,7 +221,7 @@ def record_maker(issue):
         'sample_id': issue.fields.customfield_11627,
         'gEVAL_database': issue.fields.customfield_11643,
         'assembly_statistics': issue.fields.customfield_11608, # This will stop some tickets being taken into the DB, a ticket can be in post-processing and not have stats yet.
-        'chromosome_result': issue.fields.customfield_11676,
+        'chromosome_result': issue.fields.customfield_11645,
         'curator': issue.fields.customfield_11657,
         'hic_kit': issue.fields.customfield_11629,
         'lat_name': issue.fields.customfield_11676
