@@ -1,9 +1,9 @@
 CREATE TABLE GritData(
     sample_id VARCHAR(40) NOT NULL,
     latin VARCHAR(50) DEFAULT NULL,
-    prefix_sl VARCHAR(1) DEFAULT NULL,
-    prefix_dl VARCHAR(2) DEFAULT NULL,
-    prefix_fn VARCHAR(30) DEFAULT NULL,
+    prefix_sl VARCHAR(1) DEFAULT 'unknown',
+    prefix_dl VARCHAR(2) DEFAULT 'unknown',
+    prefix_fn VARCHAR(30) DEFAULT 'unknown',
     family_name VARCHAR(50) DEFAULT NULL,
     jira_key VARCHAR(10) DEFAULT NULL,
     project_type VARCHAR(20) DEFAULT NULL,
