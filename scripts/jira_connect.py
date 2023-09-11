@@ -1,6 +1,5 @@
 """
 Jira connect
-Used by R script to connect to JIRA and pull data
 
 # Eliminates all where there isn't a full complement of data for the ticket
 """
@@ -33,6 +32,7 @@ def reg_full_name(db_name):
     :return:
     """
     if db_name:
+        pipeline_tech = 'gEVAL'
         name_acc_search = re.search(r'dtol_([a-z]*[A-Z]\w+)', db_name)  # catches idAnoDarlJC_H15_27_1 from yy5_dtol_idAnoDarlJC_H15_27_1
         if name_acc_search is None:
             print(1)
@@ -44,14 +44,18 @@ def reg_full_name(db_name):
                     print(3)
                     name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+)', db_name)  # catches fAplTae from dp24_vgp_fAplTae
                 else:
-                    pass
+                    if len(db_name.split('_')) == 2:
+                        name_acc_search = db_name
+                    pipeline_tech = 'TreeVal'
 
-        name_acc = name_acc_search.group(1)
+        if pipeline_tech != 'TreeVal':
+            name_acc = name_acc_search.group(1)
     else:
         name_acc = False
+        
     #print(db_name)
     #print(name_acc)
-    return name_acc
+    return name_acc, pipeline_tech
 
 
 def reg_length_info(scaff_data):
@@ -275,7 +279,7 @@ def record_maker(issue):
     for field, result in id_for_custom_field_name.items():
         if field == 'gEVAL_database':
             if not issue.fields.customfield_10201 == 'aBomBom1':
-                name_acc = reg_full_name(result)
+                name_acc, pipeline_tech = reg_full_name(result)
                 if not name_acc:
                     name_acc = str(issue.fields.customfield_10201) + '_' + str(issue.fields.customfield_10510)
                 else:
@@ -343,7 +347,7 @@ def record_maker(issue):
 
     return name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
             n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
-            date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, telo_motif, telo_len
+            date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, telo_motif, telo_len, pipeline_tech
 
 
 # Perhaps a function to check whether theres already a file here would be a good idea?
@@ -392,7 +396,7 @@ def tsv_file_prepender(file_name_sort):
                 'length before\tlength after\tlength change\tscaff n50 before\tscaff n50 after\tscaff n50 change\t' \
                 'scaff_count_before\tscaff_count_after\tscaff_count_per\tchr assignment\tassignment\t' \
                 'date_in_YMD\tdate_updated\tmanual_interventions\tchrosome_named\texpected_sex\tobserved_sex\t' \
-                'curated_autosome\tcurated_allosome\tproject_code\ttelo_motif\ttelo_length\n'
+                'curated_autosome\tcurated_allosome\tproject_code\ttelo_motif\ttelo_length\tpipeline\n'
 
     with open(file_name_sort, 'r+') as file:
         original = file.read()
@@ -473,7 +477,7 @@ def main():
 
                 name_acc, lat_name, family_data, length_before, length_after, length_change_per, n50_before, n50_after, \
                 n50_change_per, scaff_count_before, scaff_count_after, scaff_count_per, chr_ass, ass_percent, ymd_date, \
-                date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, telo_motif, telo_len = record_maker(issue)
+                date_updated, interventions, chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, telo_motif, telo_len, pipeline = record_maker(issue)
                 prefix, prefix_v, prefix_label = reg_make_prefix(name_acc)
 
                 record = [name_acc, lat_name, prefix, prefix_v, prefix_label, family_data,
@@ -482,7 +486,7 @@ def main():
                             n50_before, n50_after, n50_change_per,
                             scaff_count_before, scaff_count_after, scaff_count_per,
                             chr_ass, ass_percent, ymd_date, date_updated, interventions,
-                            chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, issue_proj, telo_motif, telo_len]
+                            chr_naming, ex_sex, ob_sex, cur_auto, cur_allo, issue_proj, telo_motif, telo_len, pipeline]
 
                 if type(record[0]) == str:
                     file_name = tsv_file_append(record, location)

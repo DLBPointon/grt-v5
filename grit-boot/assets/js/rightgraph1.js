@@ -25,6 +25,7 @@ function makegraph_box() {
             } else {
                 y.push(item[two]);
             }
+
             c.push(item[three]);
         });
 
