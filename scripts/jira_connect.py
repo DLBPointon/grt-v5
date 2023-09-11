@@ -46,8 +46,10 @@ def reg_full_name(db_name):
                     name_acc_search = re.search(r'_.*_([a-z]*[A-Z]\w+)', db_name)  # catches fAplTae from dp24_vgp_fAplTae
                 else:
                     pass
-
-        name_acc = name_acc_search.group(1)
+        if name_acc_search.group(1):
+            name_acc = name_acc_search.group(1)
+        else:
+            name_acc = db_name
     else:
         name_acc = False
     #print(db_name)
